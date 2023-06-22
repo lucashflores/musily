@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5AEBF15C2A446AE4003D9252 /* TrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEBF15B2A446AE4003D9252 /* TrackView.swift */; };
 		C17B20B02A43195B006EDAF7 /* MusilyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B20AF2A43195B006EDAF7 /* MusilyApp.swift */; };
 		C17B20B22A43195B006EDAF7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B20B12A43195B006EDAF7 /* ContentView.swift */; };
 		C17B20B42A43195C006EDAF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C17B20B32A43195C006EDAF7 /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5AEBF15B2A446AE4003D9252 /* TrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackView.swift; sourceTree = "<group>"; };
 		C17B20AC2A43195B006EDAF7 /* Musily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Musily.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C17B20AF2A43195B006EDAF7 /* MusilyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusilyApp.swift; sourceTree = "<group>"; };
 		C17B20B12A43195B006EDAF7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,12 +73,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5AEBF15A2A446A8D003D9252 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5AEBF15B2A446AE4003D9252 /* TrackView.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		C17B20A32A43195B006EDAF7 = {
 			isa = PBXGroup;
 			children = (
 				C17B20AE2A43195B006EDAF7 /* Musily */,
 				C17B20BF2A43195C006EDAF7 /* MusilyTests */,
 				C17B20C92A43195C006EDAF7 /* MusilyUITests */,
+				5AEBF15A2A446A8D003D9252 /* Model */,
 				C17B20AD2A43195B006EDAF7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -258,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C17B20B22A43195B006EDAF7 /* ContentView.swift in Sources */,
+				5AEBF15C2A446AE4003D9252 /* TrackView.swift in Sources */,
 				C17B20B02A43195B006EDAF7 /* MusilyApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
