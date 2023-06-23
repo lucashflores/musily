@@ -11,7 +11,7 @@ import SwiftUI
 struct MusilyApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TrackView()
         }
     }
 }

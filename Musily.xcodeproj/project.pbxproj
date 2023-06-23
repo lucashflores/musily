@@ -15,6 +15,7 @@
 		C17B20C12A43195C006EDAF7 /* MusilyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B20C02A43195C006EDAF7 /* MusilyTests.swift */; };
 		C17B20CB2A43195C006EDAF7 /* MusilyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B20CA2A43195C006EDAF7 /* MusilyUITests.swift */; };
 		C17B20CD2A43195C006EDAF7 /* MusilyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B20CC2A43195C006EDAF7 /* MusilyUITestsLaunchTests.swift */; };
+		FE0CABC32A44839F004D81AF /* MusicGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0CABC22A44839F004D81AF /* MusicGetter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		C17B20C62A43195C006EDAF7 /* MusilyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MusilyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C17B20CA2A43195C006EDAF7 /* MusilyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusilyUITests.swift; sourceTree = "<group>"; };
 		C17B20CC2A43195C006EDAF7 /* MusilyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusilyUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		FE0CABC22A44839F004D81AF /* MusicGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicGetter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				C17B20AF2A43195B006EDAF7 /* MusilyApp.swift */,
+				FE0CABC22A44839F004D81AF /* MusicGetter.swift */,
 				C17B20B12A43195B006EDAF7 /* ContentView.swift */,
 				C17B20B32A43195C006EDAF7 /* Assets.xcassets */,
 				C17B20B52A43195C006EDAF7 /* Preview Content */,
@@ -268,6 +271,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE0CABC32A44839F004D81AF /* MusicGetter.swift in Sources */,
 				C17B20B22A43195B006EDAF7 /* ContentView.swift in Sources */,
 				5AEBF15C2A446AE4003D9252 /* TrackView.swift in Sources */,
 				C17B20B02A43195B006EDAF7 /* MusilyApp.swift in Sources */,
@@ -429,9 +433,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Musily/Preview Content\"";
-				DEVELOPMENT_TEAM = 7P886DJU8X;
+				DEVELOPMENT_TEAM = S846XZGJ2L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "vamo usar ai";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -442,7 +447,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = appleDeveloperAcademy.Musily;
+				PRODUCT_BUNDLE_IDENTIFIER = tiago.Musily;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -458,9 +463,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Musily/Preview Content\"";
-				DEVELOPMENT_TEAM = 7P886DJU8X;
+				DEVELOPMENT_TEAM = S846XZGJ2L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "vamo usar ai";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -471,7 +477,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = appleDeveloperAcademy.Musily;
+				PRODUCT_BUNDLE_IDENTIFIER = tiago.Musily;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
