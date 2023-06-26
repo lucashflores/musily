@@ -10,7 +10,7 @@ import MusicKit
 import MediaPlayer
 
 struct ContentView: View {
-    @ObservedObject var musicGetter = MusicGetter()
+//    @ObservedObject var musicGetter = MusicGetter()
 
     var body: some View {
         TabView{
@@ -20,6 +20,10 @@ struct ContentView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(.horizontal, 32)
         .background(Color("bkDarkColor"))
+        .task {
+            print("sssssss")
+            let authorization = await MusicAuthorization.request()
+        }
     }
 }
 

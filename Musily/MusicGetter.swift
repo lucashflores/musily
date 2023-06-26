@@ -19,12 +19,8 @@ struct Item: Identifiable, Hashable {
 
 class MusicGetter: ObservableObject {
     private var songs = [Item]()
-    @Published var song : Item?
-    private let request: MusicCatalogSearchRequest = {
-        var request = MusicCatalogSearchRequest(term: "Happy", types: [Song.self])
-        request.limit = 25
-        return request
-    }()
+    @Published var song : Track?
+
     
     init() {
         fetchMusic()
@@ -36,11 +32,16 @@ class MusicGetter: ObservableObject {
             switch status {
             case .authorized:
                 do {
-                    let result = try await request.response()
-                    self.songs = result.songs.compactMap({ return .init(name: $0.title, artist: $0.artistName, imageURL:$0.artwork?.url(width: 300, height: 300), musicURL: $0.url, musicId: $0.id)})
-                    song = songs.randomElement()
+                    let request = MusicCatalogResourceRequest<Playlist>(matching: \.id, equalTo: MusicItemID(rawValue: "pl.ba2404fbc4464b8ba2d60399189cf24e"))
+                    let plResponse = try await request.response()
+                    let playlist = plResponse.items.first
+                    let plWithTracks = try await playlist?.with([.tracks])
+                    let today = Date.now
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "dd"
+                    let day: Int = Int(dateFormatter.string(from: today)) ?? 1
+                    self.song = plWithTracks?.tracks?[day - 1]
                 } catch {
-                    error
                     print(error)
                 }
             default:

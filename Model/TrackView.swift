@@ -23,17 +23,17 @@ struct TrackView: View {
                     .font(.headline)
                     .foregroundColor(.white)
                 
-                AsyncImage(url: musica.imageURL)
+                AsyncImage(url: musica.artwork?.url(width: 300, height: 300))
                     .frame(width: 300, height: 300, alignment: .center)
                     .cornerRadius(16)
                 
                 VStack {
-                    Text(musica.name)
+                    Text(musica.title)
                         .font(.title3)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                     
-                    Text(musica.artist)
+                    Text(musica.artistName)
                         .font(.title3)
                         .fontWeight(.regular)
                         .foregroundColor(.gray)
@@ -104,13 +104,13 @@ struct TrackView: View {
         }
     }
     
-    func playsMusic(musica : Item) async {
+    func playsMusic(musica : Track) async {
         do{
-            let request = MusicCatalogResourceRequest<Song>(matching: \.id, equalTo: musica.musicId)
-            let response = try await request.response()
-            guard let song = response.items.first else { return }
+//            let request = MusicCatalogResourceRequest<Song>(matching: \.id, equalTo: musica.musicId)
+//            let response = try await request.response()
+//            guard let song = response.items.first else { return }
             let player = ApplicationMusicPlayer.shared
-            player.queue = [song]
+            player.queue = [musica]
             try await player.prepareToPlay()
             try await player.play()
         } catch {
@@ -119,7 +119,7 @@ struct TrackView: View {
         }
     }
     
-    func playsSong (musica : Item) {
+    func playsSong (musica : Track) {
         Task {
             await playsMusic(musica: musica)
         }
