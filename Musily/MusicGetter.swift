@@ -39,12 +39,9 @@ class MusicGetter: ObservableObject {
                     let today = Date.now
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "dd"
-                    let day: Int = Int(dateFormatter.string(from: today))!
-                    print(String(describing: plWithTracks))
-                    print(day)
-                    self.song = plWithTracks?.tracks?[(day ?? 1) - 1]
+                    let day: Int = Int(dateFormatter.string(from: today)) ?? 1
+                    self.song = plWithTracks?.tracks?[day - 1]
                 } catch {
-                    error
                     print(error)
                 }
             default:
