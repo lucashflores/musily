@@ -12,6 +12,8 @@ import MediaPlayer
 
 struct TrackView: View {
     @ObservedObject var musicGetter = MusicGetter()
+    @State var imagem = "play.fill"
+    let player = ApplicationMusicPlayer.shared
     
     var body: some View {
         if let musica = musicGetter.song {
@@ -23,7 +25,7 @@ struct TrackView: View {
                     .font(.headline)
                     .foregroundColor(.white)
                 
-                AsyncImage(url: musica.artwork?.url(width: 300, height: 300))
+                AsyncImage(url: musica.artists?.first?.artwork?.url(width: 300, height: 300))
                     .frame(width: 300, height: 300, alignment: .center)
                     .cornerRadius(16)
                 
@@ -38,56 +40,28 @@ struct TrackView: View {
                         .fontWeight(.regular)
                         .foregroundColor(.gray)
                     
-                    
-                    Text("Placheholder do player")
-                        .font(.title3)
-                        .fontWeight(.light)
-                        .foregroundColor(.white)
                 }
                 
                 
                 Button {
-                        playsSong(musica: musica)
-                } label: {
-                    HStack {
-                        Group {
-                            Image(systemName: "arrow.triangle.2.circlepath.circle.fill")
-                                .font(.title3)
-                            
-                            Text("Play")
-                                .font(.callout)
-                                .fontWeight(.semibold)
-                        }
-                        .foregroundColor(.white)
-                        
-                        
-                    }
-                    .padding()
-                    .padding(.horizontal, 8)
-                    .background(LinearGradient(gradient: Gradient(colors: [Color("AccentColor1"), Color("AccentColor2")]), startPoint: .leading, endPoint: .trailing))
-                    .cornerRadius(38)
-                }
-                
-                Button {
+                    if player.state.playbackStatus == .playing {
+                        imagem = "play.fill"
+                        player.pause()
 
-                } label: {
-                    HStack {
-                        Group {
-                            Image(systemName: "arrow.triangle.2.circlepath.circle.fill")
-                                .font(.title3)
-                            
-                            Text("Nova música")
-                                .font(.callout)
-                                .fontWeight(.semibold)
+                    } else {
+                        imagem = "pause.fill"
+                        if player.queue.entries.isEmpty {
+                            playsSong(musica: musica)
                         }
-                        .foregroundColor(.white)
-                        
-                        
+                        else {
+                            resumeSong()
+                        }
                     }
-                    .padding()
-                    .padding(.horizontal, 8)
-                    .background(LinearGradient(gradient: Gradient(colors: [Color("AccentColor1"), Color("AccentColor2")]), startPoint: .leading, endPoint: .trailing))
-                    .cornerRadius(38)
+                } label: {
+                    Image (systemName: imagem)
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                        .foregroundColor(.white)
                 }
                 
                 Spacer()
@@ -104,12 +78,8 @@ struct TrackView: View {
         }
     }
     
-    func playsMusic(musica : Track) async {
-        do{
-//            let request = MusicCatalogResourceRequest<Song>(matching: \.id, equalTo: musica.musicId)
-//            let response = try await request.response()
-//            guard let song = response.items.first else { return }
-            let player = ApplicationMusicPlayer.shared
+    func playsMusic(musica : Song) async {
+        do{ 
             player.queue = [musica]
             try await player.prepareToPlay()
             try await player.play()
@@ -119,7 +89,18 @@ struct TrackView: View {
         }
     }
     
-    func playsSong (musica : Track) {
+    func resumeSong() {
+        Task {
+            do {
+                try await player.play()
+            }
+            catch {
+                
+            }
+        }
+    }
+    
+    func playsSong (musica : Song) {
         Task {
             await playsMusic(musica: musica)
         }

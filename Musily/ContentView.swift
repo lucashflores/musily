@@ -10,22 +10,54 @@ import MusicKit
 import MediaPlayer
 
 struct ContentView: View {
-//    @ObservedObject var musicGetter = MusicGetter()
-
+    @State var authStatus: AuthStatus = .fetchingAuth
     var body: some View {
         TabView{
-            TrackView()
+            switch authStatus {
+            case .fetchingAuth:
+                ProgressView()
+                    .progressViewStyle(.circular)
+            case .noMediaLibraryPermission:
+                InstructionsView()
+            case .noAppleMusicSubscription:
+                SubscribeToAppleMusicView()
+            default:
+                TrackView()
+            }
         }
-        .padding()
+        .onAppear(perform: getAuth)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding(.horizontal, 32)
-        .background(Color("bkDarkColor"))
-        .task {
-            print("sssssss")
-            let authorization = await MusicAuthorization.request()
+    }
+    
+    
+    func getAuth() {
+        Task {
+            let status = await MusicAuthorization.request()
+            switch status {
+            case .authorized:
+                let subStatus = try await MusicSubscription.current
+                if (subStatus.canBecomeSubscriber) {
+                    self.authStatus = .noAppleMusicSubscription
+                }
+                else {
+                    self.authStatus = .authorized
+                }
+                break
+            default:
+                break
+            }
         }
     }
 }
+
+enum AuthStatus {
+    case fetchingAuth
+    case noMediaLibraryPermission
+    case noAppleMusicSubscription
+    case authorized
+}
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
