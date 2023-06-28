@@ -34,7 +34,10 @@ class MusicGetter: ObservableObject {
                     let songId = plWithTracks?.tracks?[day - 1].id
                     let songRequest = MusicCatalogResourceRequest<Song>(matching: \.id, equalTo: songId ?? MusicItemID(rawValue: ""))
                     let songResponse = try await songRequest.response()
-                    self.song = try await songResponse.items.first?.with([.artists])
+                    let songWithArtists = try await songResponse.items.first?.with([.artists])
+                    DispatchQueue.main.async {
+                        self.song = songWithArtists
+                    }
                 } catch {
                     print(error)
                 }

@@ -18,6 +18,8 @@
 		C1C86DA12A49B68C00BD6E81 /* AppleMusicSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C86DA02A49B68C00BD6E81 /* AppleMusicSong.swift */; };
 		C1C86DA42A4A987300BD6E81 /* InstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C86DA32A4A987300BD6E81 /* InstructionsView.swift */; };
 		C1C86DA62A4A9A0D00BD6E81 /* SubscribeToAppleMusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C86DA52A4A9A0D00BD6E81 /* SubscribeToAppleMusicView.swift */; };
+		C1C86DA82A4B1E0200BD6E81 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C86DA72A4B1E0200BD6E81 /* InfoView.swift */; };
+		C1C86DAA2A4B26E300BD6E81 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C86DA92A4B26E300BD6E81 /* ErrorView.swift */; };
 		FE0CABC32A44839F004D81AF /* MusicGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0CABC22A44839F004D81AF /* MusicGetter.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +56,8 @@
 		C1C86DA22A4A96B200BD6E81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C1C86DA32A4A987300BD6E81 /* InstructionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsView.swift; sourceTree = "<group>"; };
 		C1C86DA52A4A9A0D00BD6E81 /* SubscribeToAppleMusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeToAppleMusicView.swift; sourceTree = "<group>"; };
+		C1C86DA72A4B1E0200BD6E81 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		C1C86DA92A4B26E300BD6E81 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		FE0CABC22A44839F004D81AF /* MusicGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicGetter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,7 +89,6 @@
 		5AEBF15A2A446A8D003D9252 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5AEBF15B2A446AE4003D9252 /* TrackView.swift */,
 				C1C86DA02A49B68C00BD6E81 /* AppleMusicSong.swift */,
 			);
 			path = Model;
@@ -115,6 +118,8 @@
 		C17B20AE2A43195B006EDAF7 /* Musily */ = {
 			isa = PBXGroup;
 			children = (
+				C1C86DA92A4B26E300BD6E81 /* ErrorView.swift */,
+				5AEBF15B2A446AE4003D9252 /* TrackView.swift */,
 				C1C86DA52A4A9A0D00BD6E81 /* SubscribeToAppleMusicView.swift */,
 				C1C86DA32A4A987300BD6E81 /* InstructionsView.swift */,
 				C1C86DA22A4A96B200BD6E81 /* Info.plist */,
@@ -123,6 +128,7 @@
 				C17B20B12A43195B006EDAF7 /* ContentView.swift */,
 				C17B20B32A43195C006EDAF7 /* Assets.xcassets */,
 				C17B20B52A43195C006EDAF7 /* Preview Content */,
+				C1C86DA72A4B1E0200BD6E81 /* InfoView.swift */,
 			);
 			path = Musily;
 			sourceTree = "<group>";
@@ -282,6 +288,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1C86DA82A4B1E0200BD6E81 /* InfoView.swift in Sources */,
+				C1C86DAA2A4B26E300BD6E81 /* ErrorView.swift in Sources */,
 				FE0CABC32A44839F004D81AF /* MusicGetter.swift in Sources */,
 				C1C86DA42A4A987300BD6E81 /* InstructionsView.swift in Sources */,
 				C17B20B22A43195B006EDAF7 /* ContentView.swift in Sources */,
