@@ -21,6 +21,7 @@
 		FE0CABC32A44839F004D81AF /* MusicGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0CABC22A44839F004D81AF /* MusicGetter.swift */; };
 		FE39C6CC2A4B0D51007B475E /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE39C6CB2A4B0D51007B475E /* InfoView.swift */; };
 		FE4E95AA2A4C66DB0009B304 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4E95A92A4C66DB0009B304 /* UIColor+.swift */; };
+		FE4E95AC2A4C76F80009B304 /* GenreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4E95AB2A4C76F80009B304 /* GenreView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		FE0CABC22A44839F004D81AF /* MusicGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicGetter.swift; sourceTree = "<group>"; };
 		FE39C6CB2A4B0D51007B475E /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		FE4E95A92A4C66DB0009B304 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		FE4E95AB2A4C76F80009B304 /* GenreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 		C17B20AE2A43195B006EDAF7 /* Musily */ = {
 			isa = PBXGroup;
 			children = (
+				FE4E95AB2A4C76F80009B304 /* GenreView.swift */,
 				C1C86DA52A4A9A0D00BD6E81 /* SubscribeToAppleMusicView.swift */,
 				C1C86DA32A4A987300BD6E81 /* InstructionsView.swift */,
 				C1C86DA22A4A96B200BD6E81 /* Info.plist */,
@@ -292,6 +295,7 @@
 				FE0CABC32A44839F004D81AF /* MusicGetter.swift in Sources */,
 				C1C86DA42A4A987300BD6E81 /* InstructionsView.swift in Sources */,
 				C17B20B22A43195B006EDAF7 /* ContentView.swift in Sources */,
+				FE4E95AC2A4C76F80009B304 /* GenreView.swift in Sources */,
 				5AEBF15C2A446AE4003D9252 /* TrackView.swift in Sources */,
 				C17B20B02A43195B006EDAF7 /* MusilyApp.swift in Sources */,
 				C1C86DA12A49B68C00BD6E81 /* AppleMusicSong.swift in Sources */,

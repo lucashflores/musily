@@ -58,25 +58,19 @@ struct TrackView: View {
                                 .frame(width: 330, height: 330, alignment: .center)
                                 .cornerRadius(16)
                             
-                            VStack(spacing: 0) {
-                                HStack {
+                            HStack{
+                                VStack(spacing: 0) {
                                     Text(musica.title)
                                         .font(.title3)
                                         .fontWeight(.bold)
                                         .foregroundColor(.white)
-                                    
-                                    Spacer()
-                                    
-                                }
-                                
-                                HStack {
                                     Text(musica.artistName)
                                         .font(.headline)
                                         .fontWeight(.light)
                                         .foregroundColor(.white)
-                                    
-                                    Spacer()
+
                                 }
+                                Spacer()
                             }
                             
                             
@@ -86,7 +80,7 @@ struct TrackView: View {
                                     if player.state.playbackStatus == .playing {
                                         imagem = "play.circle.fill"
                                         player.pause()
-                                        
+
                                     } else {
                                         imagem = "pause.circle.fill"
                                         if player.queue.entries.isEmpty {
@@ -119,9 +113,14 @@ struct TrackView: View {
                                     .frame(width: 40, height: 40)
                             }
                             
-                            
-                            
-                            Spacer()
+                            ScrollView(.horizontal, showsIndicators: false){
+                                HStack{
+                                    ForEach(musica.genreNames, id: \.self){ genre in
+                                        GenreView (text: genre)
+                                            
+                                    }
+                                }
+                            }
                             
                             /// Artista vem aqui
                             HStack {
@@ -131,31 +130,22 @@ struct TrackView: View {
                                     .foregroundColor(.white)
                                 Spacer()
                             }
-                            Group{
-                                Text("Artista")
-                                    .bold()
-                                    .foregroundColor(.gray)
-                                    .font(.system(size: 24))
-                                Text (musica.artistName)
-                                    .padding(.bottom, 16)
-                                Text("Álbum")
-                                    .bold()
-                                    .foregroundColor(.gray)
-                                    .font(.system(size: 24))
-                                Text (musica.albumTitle ?? "Indisponivel")
-                                    .padding(.bottom, 16)
-                                Text("Compositor")
-                                    .bold()
-                                    .foregroundColor(.gray)
-                                    .font(.system(size: 24))
-                                Text (musica.composerName ?? "Indisponível")
-                                    .padding(.bottom, 16)
-                                Text("Título")
-                                    .bold()
-                                    .foregroundColor(.gray)
-                                    .font(.system(size: 24))
-                                Text (musica.title)
-                                    .padding(.bottom, 16)
+                            HStack {
+                                VStack (alignment: .leading){
+                                    Text("Álbum")
+                                        .bold()
+                                        .foregroundColor(.gray)
+                                        .font(.system(size: 24))
+                                    Text (musica.albumTitle ?? "Indisponivel")
+                                        .padding(.bottom, 16)
+                                    Text("Compositor")
+                                        .bold()
+                                        .foregroundColor(.gray)
+                                        .font(.system(size: 24))
+                                    Text (musica.composerName ?? "Indisponível")
+                                        .padding(.bottom, 16)
+                                }
+                                Spacer()
                             }
                             
                         }
@@ -197,18 +187,18 @@ struct TrackView: View {
             print(error)
         }
     }
-    
+
     func resumeSong() {
         Task {
             do {
                 try await player.play()
             }
-            catch {
-                
+           catch {
+
             }
         }
     }
-    
+
     func playsSong (musica : Song) {
         Task {
             await playsMusic(musica: musica)
