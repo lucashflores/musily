@@ -11,6 +11,7 @@ import MusicKit
 
 class MusicGetter: ObservableObject {
     @Published var song : Song?
+    var test = ""
 
     
     init() {
@@ -34,7 +35,24 @@ class MusicGetter: ObservableObject {
                     let songId = plWithTracks?.tracks?[day - 1].id
                     let songRequest = MusicCatalogResourceRequest<Song>(matching: \.id, equalTo: songId ?? MusicItemID(rawValue: ""))
                     let songResponse = try await songRequest.response()
-                    self.song = try await songResponse.items.first?.with([.artists])
+                    let songWithArtists = try await songResponse.items.first?.with([.artists])
+                    DispatchQueue.main.async {
+                        self.song = songWithArtists
+                    }
+                    
+                    
+                    await NetworkManager.shared.askChatGPT(prompt: "Me fale sobre o gênero de música rap em no máximo 50 palavras") {
+                        [weak self] result in
+                        switch result {
+                        case .success(let answer):
+//                            self.test = answer
+                            print(answer)
+                            break
+                        case .failure(let error):
+                            print(error)
+                            break
+                        }
+                    }
                 } catch {
                     print(error)
                 }

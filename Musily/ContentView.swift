@@ -35,15 +35,30 @@ struct ContentView: View {
             let status = await MusicAuthorization.request()
             switch status {
             case .authorized:
-                let subStatus = try await MusicSubscription.current
-                if (subStatus.canBecomeSubscriber) {
-                    self.authStatus = .noAppleMusicSubscription
-                }
-                else {
-                    self.authStatus = .authorized
+                do {
+                    let subStatus = try await MusicSubscription.current
+        
+                    if (subStatus.canBecomeSubscriber) {
+                        DispatchQueue.main.async {
+                            self.authStatus = .noAppleMusicSubscription
+                            
+                        }
+                    }
+                    else {
+                        DispatchQueue.main.async {
+                            self.authStatus = .authorized
+                        }
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        self.authStatus = .error
+                    }
                 }
                 break
             default:
+                DispatchQueue.main.async {
+                    self.authStatus = .noMediaLibraryPermission
+                }
                 break
             }
         }
@@ -55,6 +70,7 @@ enum AuthStatus {
     case noMediaLibraryPermission
     case noAppleMusicSubscription
     case authorized
+    case error
 }
 
 
