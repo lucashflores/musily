@@ -11,17 +11,21 @@ import MediaPlayer
 
 
 struct TrackView: View {
-    @ObservedObject var musicGetter = MusicGetter()
+    var cards: [MediaInformationCard]?
+    private var player = AppleMusicPlayer()
+    @ObservedObject private var viewModel: TrackViewModel = TrackViewModel()
     @State var imagem = "play.circle.fill"
     @State var bgColor = Color("bkDarkColor")
-    let player = ApplicationMusicPlayer.shared
+    
     
     var body: some View {
-        if let musica = musicGetter.song {
-            ZStack {
-                
+        ZStack { 
+            if (viewModel.isLoading) {
+                ProgressView().progressViewStyle(.circular)
+            }
+            else if let music = viewModel.song {
+            
                 VStack(spacing: 0) {
-                    
                     Rectangle()
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .foregroundColor(Color(uiColor: .clear))
@@ -54,17 +58,19 @@ struct TrackView: View {
                                 .foregroundColor(.white)
                             }
                             
-                            AsyncImage(url: musica.artists?.first?.artwork?.url(width: 330, height: 330))
+                            AsyncImage(url: music.artistArtworkURL)
                                 .frame(width: 330, height: 330, alignment: .center)
                                 .cornerRadius(16)
                             
+                                
+                            
                             HStack{
                                 VStack(spacing: 0) {
-                                    Text(musica.title)
+                                    Text(music.title ?? "Indisponível")
                                         .font(.title3)
                                         .fontWeight(.bold)
                                         .foregroundColor(.white)
-                                    Text(musica.artistName)
+                                    Text(music.artistName ?? "Indisponível")
                                         .font(.headline)
                                         .fontWeight(.light)
                                         .foregroundColor(.white)
@@ -77,17 +83,21 @@ struct TrackView: View {
                             HStack {
 
                                 Button {
-                                    if player.state.playbackStatus == .playing {
+                                    if player.getPlaybackStatus() == .playing {
                                         imagem = "play.circle.fill"
                                         player.pause()
 
                                     } else {
-                                        imagem = "pause.circle.fill"
-                                        if player.queue.entries.isEmpty {
-                                            playsSong(musica: musica)
-                                        }
-                                        else {
-                                            resumeSong()
+                                        if let musicKitSong = music.musicKitSong {
+                                            imagem = "pause.circle.fill"
+                                            if player.isPlayerQueueEmpty() {
+                                                player.playsSong(musica: musicKitSong)
+                                            }
+                                            else {
+                                                player.resumeSong()
+                                            }
+                                        } else {
+                                            
                                         }
                                     }
                                 } label: {
@@ -115,7 +125,7 @@ struct TrackView: View {
                             
                             ScrollView(.horizontal, showsIndicators: false){
                                 HStack{
-                                    ForEach(musica.genreNames, id: \.self){ genre in
+                                    ForEach(music.genreNames, id: \.self){ genre in
                                         GenreView (text: genre)
                                             
                                     }
@@ -136,13 +146,13 @@ struct TrackView: View {
                                         .bold()
                                         .foregroundColor(.gray)
                                         .font(.system(size: 24))
-                                    Text (musica.albumTitle ?? "Indisponivel")
+                                    Text (music.albumTitle ?? "Indisponivel")
                                         .padding(.bottom, 16)
                                     Text("Compositor")
                                         .bold()
                                         .foregroundColor(.gray)
                                         .font(.system(size: 24))
-                                    Text (musica.composerName ?? "Indisponível")
+                                    Text (music.composerName ?? "Indisponível")
                                         .padding(.bottom, 16)
                                 }
                                 Spacer()
@@ -155,53 +165,12 @@ struct TrackView: View {
                     .padding()
                 }
             }
-            .background(bgColor)
-            .opacity(0.9)
-            .onAppear {
-                let url = musica.artwork?.url(width: 300, height: 300)
-                
-                DispatchQueue.global().async {
-                    let data = try? Data(contentsOf: url!)
-                    DispatchQueue.main.async {
-                        let image = UIImage(data: data!)
-                        bgColor = Color(uiColor: image!.averageColor!)
-                    }
-                }
-                
-            }
-            
-            
-            
-        }else {
-            ProgressView()
-                .progressViewStyle(.circular)
         }
-    }
-    
-    func playsMusic(musica : Song) async {
-        do{
-            player.queue = [musica]
-            try await player.prepareToPlay()
-            try await player.play()
-        } catch {
-            print(error)
-        }
-    }
-
-    func resumeSong() {
-        Task {
-            do {
-                try await player.play()
-            }
-           catch {
-
-            }
-        }
-    }
-
-    func playsSong (musica : Song) {
-        Task {
-            await playsMusic(musica: musica)
+        .background(self.bgColor)
+        .opacity(0.9)
+        .onAppear {
+            viewModel.fetchMusic()
+            
         }
     }
 }
