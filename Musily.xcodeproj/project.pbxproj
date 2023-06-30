@@ -23,9 +23,6 @@
 		C1C86DA12A49B68C00BD6E81 /* AppleMusicSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C86DA02A49B68C00BD6E81 /* AppleMusicSong.swift */; };
 		C1C86DA42A4A987300BD6E81 /* InstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C86DA32A4A987300BD6E81 /* InstructionsView.swift */; };
 		C1C86DA62A4A9A0D00BD6E81 /* SubscribeToAppleMusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C86DA52A4A9A0D00BD6E81 /* SubscribeToAppleMusicView.swift */; };
-		FE02B8002A4EF8A1006EF4E2 /* Apresentacao.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE02B7FF2A4EF8A1006EF4E2 /* Apresentacao.swift */; };
-		FE02B8022A4EF934006EF4E2 /* Onboarding1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE02B8012A4EF934006EF4E2 /* Onboarding1View.swift */; };
-		FE02B8042A4EF96C006EF4E2 /* Onboarding2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE02B8032A4EF96C006EF4E2 /* Onboarding2View.swift */; };
 		C1C86DB02A4DAF8000BD6E81 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C86DAF2A4DAF8000BD6E81 /* NetworkManager.swift */; };
 		C1C86DB22A4DC1E900BD6E81 /* ChatGPTAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C86DB12A4DC1E900BD6E81 /* ChatGPTAnswer.swift */; };
 		C1C86DB42A4DC29800BD6E81 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C86DB32A4DC29800BD6E81 /* NetworkError.swift */; };
@@ -35,7 +32,6 @@
 		FE39C6CC2A4B0D51007B475E /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE39C6CB2A4B0D51007B475E /* InfoView.swift */; };
 		FE4E95AA2A4C66DB0009B304 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4E95A92A4C66DB0009B304 /* UIColor+.swift */; };
 		FE4E95AC2A4C76F80009B304 /* GenreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4E95AB2A4C76F80009B304 /* GenreView.swift */; };
-		FECBEEFA2A4DA58400F3B3FD /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECBEEF92A4DA58400F3B3FD /* CardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,9 +72,6 @@
 		C1C86DA22A4A96B200BD6E81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C1C86DA32A4A987300BD6E81 /* InstructionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsView.swift; sourceTree = "<group>"; };
 		C1C86DA52A4A9A0D00BD6E81 /* SubscribeToAppleMusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeToAppleMusicView.swift; sourceTree = "<group>"; };
-		FE02B7FF2A4EF8A1006EF4E2 /* Apresentacao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Apresentacao.swift; sourceTree = "<group>"; };
-		FE02B8012A4EF934006EF4E2 /* Onboarding1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding1View.swift; sourceTree = "<group>"; };
-		FE02B8032A4EF96C006EF4E2 /* Onboarding2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding2View.swift; sourceTree = "<group>"; };
 		C1C86DAF2A4DAF8000BD6E81 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C1C86DB12A4DC1E900BD6E81 /* ChatGPTAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTAnswer.swift; sourceTree = "<group>"; };
 		C1C86DB32A4DC29800BD6E81 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -88,7 +81,6 @@
 		FE39C6CB2A4B0D51007B475E /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		FE4E95A92A4C66DB0009B304 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		FE4E95AB2A4C76F80009B304 /* GenreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreView.swift; sourceTree = "<group>"; };
-		FECBEEF92A4DA58400F3B3FD /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,11 +143,6 @@
 		C17B20AE2A43195B006EDAF7 /* Musily */ = {
 			isa = PBXGroup;
 			children = (
-				FE02B7FF2A4EF8A1006EF4E2 /* Apresentacao.swift */,
-				FE4E95AB2A4C76F80009B304 /* GenreView.swift */,
-				FECBEEF92A4DA58400F3B3FD /* CardView.swift */,
-				C1C86DA52A4A9A0D00BD6E81 /* SubscribeToAppleMusicView.swift */,
-				C1C86DA32A4A987300BD6E81 /* InstructionsView.swift */,
 				C1C86DB92A4EF7EB00BD6E81 /* Views */,
 				C1C86DAE2A4DAF6C00BD6E81 /* Utilities */,
 				5AEBF15A2A446A8D003D9252 /* Model */,
@@ -163,8 +150,6 @@
 				C17B20AF2A43195B006EDAF7 /* MusilyApp.swift */,
 				C17B20B32A43195C006EDAF7 /* Assets.xcassets */,
 				C17B20B52A43195C006EDAF7 /* Preview Content */,
-				FE02B8012A4EF934006EF4E2 /* Onboarding1View.swift */,
-				FE02B8032A4EF96C006EF4E2 /* Onboarding2View.swift */,
 			);
 			path = Musily;
 			sourceTree = "<group>";
@@ -361,13 +346,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE02B8042A4EF96C006EF4E2 /* Onboarding2View.swift in Sources */,
-				FE02B8002A4EF8A1006EF4E2 /* Apresentacao.swift in Sources */,
 				C1C86DB82A4EF74600BD6E81 /* TrackViewModel.swift in Sources */,
 				FE39C6CC2A4B0D51007B475E /* InfoView.swift in Sources */,
 				C1C86DA42A4A987300BD6E81 /* InstructionsView.swift in Sources */,
 				C17B20B22A43195B006EDAF7 /* ContentView.swift in Sources */,
-				FE02B8022A4EF934006EF4E2 /* Onboarding1View.swift in Sources */,
 				C1C86DB02A4DAF8000BD6E81 /* NetworkManager.swift in Sources */,
 				FE4E95AC2A4C76F80009B304 /* GenreView.swift in Sources */,
 				5AEBF15C2A446AE4003D9252 /* TrackView.swift in Sources */,
@@ -542,7 +524,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Musily/Preview Content\"";
-				DEVELOPMENT_TEAM = S846XZGJ2L;
+				DEVELOPMENT_TEAM = 7P886DJU8X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Musily/Info.plist;
