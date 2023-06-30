@@ -12,6 +12,8 @@ struct GenreView: View {
     var body: some View {
         Text(text)
             .padding(.horizontal)
+            .padding(.vertical, 4)
+            .font(.footnote)
             .background(Color("cinzaApp"))
             .cornerRadius(16)
     }

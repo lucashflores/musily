@@ -1,32 +1,34 @@
-//
-//  ContentView.swift
-//  Musily
-//
-//  Created by Lucas Flores on 21/06/23.
-//
-
 import SwiftUI
 import MusicKit
 import MediaPlayer
 
 struct ContentView: View {
     @State var authStatus: AuthStatus = .fetchingAuth
+    @State var showOnboarding: Bool = true
     var body: some View {
-        TabView{
-            switch authStatus {
-            case .fetchingAuth:
-                ProgressView()
-                    .progressViewStyle(.circular)
-            case .noMediaLibraryPermission:
-                InstructionsView()
-            case .noAppleMusicSubscription:
-                SubscribeToAppleMusicView()
-            default:
-                TrackView()
+        NavigationView {
+            TabView{
+                switch authStatus {
+                case .fetchingAuth:
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                case .noMediaLibraryPermission:
+                    InstructionsView()
+                case .noAppleMusicSubscription:
+                    SubscribeToAppleMusicView(isPresented: .constant(true))
+                default:
+                    TrackView()
+                }
+            }
+            .onAppear(perform: getAuth)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+        .fullScreenCover(isPresented: $showOnboarding) {
+            ZStack {
+                OnboardingView(showOnboarding: $showOnboarding)
             }
         }
-        .onAppear(perform: getAuth)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        
     }
     
     
@@ -62,5 +64,19 @@ enum AuthStatus {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+
+struct OnboardingView: View {
+    @Binding var showOnboarding: Bool
+    var body: some View {
+        TabView {
+            Apresentacao()
+            Onboarding1View()
+            Onboarding2View(showOnboarding: $showOnboarding)
+        }
+        .tabViewStyle(PageTabViewStyle())
+        .ignoresSafeArea()
     }
 }
