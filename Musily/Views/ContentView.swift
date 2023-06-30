@@ -18,6 +18,7 @@ struct ContentView: View {
                     SubscribeToAppleMusicView(isPresented: .constant(true))
                 default:
                     TrackView()
+                    
                 }
             }
             .onAppear(perform: getAuth)
@@ -84,15 +85,3 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 
-struct OnboardingView: View {
-    @Binding var showOnboarding: Bool
-    var body: some View {
-        TabView {
-            Apresentacao()
-            Onboarding1View()
-            Onboarding2View(showOnboarding: $showOnboarding)
-        }
-        .tabViewStyle(PageTabViewStyle())
-        .ignoresSafeArea()
-    }
-}

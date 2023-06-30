@@ -1,10 +1,3 @@
-//
-//  MusicPlayer.swift
-//  Musily
-//
-//  Created by Lucas Flores on 30/06/23.
-//
-
 import Foundation
 import MusicKit
 
@@ -48,5 +41,13 @@ class AppleMusicPlayer {
     
     func pause() {
         player.pause()
+    }
+    
+    func addsToPlaylist (musica: Song) {
+        Task{
+            let library = MusicLibrary.shared
+            let playlist = try await library.createPlaylist(name: "Recommendations")
+            try await library.add(musica, to: playlist)
+        }
     }
 }

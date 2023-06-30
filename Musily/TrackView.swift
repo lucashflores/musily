@@ -1,3 +1,7 @@
+import SwiftUI
+import MusicKit
+import MediaPlayer
+
 //
 //  TrackView.swift
 //  Musily
@@ -10,22 +14,27 @@ import MusicKit
 import MediaPlayer
 
 
+    
+
+//
+
+
+
 struct TrackView: View {
     var cards: [MediaInformationCard]?
     private var player = AppleMusicPlayer()
     @ObservedObject private var viewModel: TrackViewModel = TrackViewModel()
     @State var imagem = "play.circle.fill"
-    @State var share = "square.and.arrow.up"
-    @State var bgColor = Color("bkDarkColor")
+    @State var play = false
     
     
     var body: some View {
-        ZStack { 
+        
+        ZStack {
             if (viewModel.isLoading) {
                 ProgressView().progressViewStyle(.circular)
             }
             else if let music = viewModel.song {
-            
                 VStack(spacing: 0) {
                     Rectangle()
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -40,7 +49,7 @@ struct TrackView: View {
                         }
                         .opacity(0.3)
                 }
-                
+            
                 ScrollView {
                     VStack {
                         VStack(spacing: 24) {
@@ -52,162 +61,135 @@ struct TrackView: View {
                                     Text("Discover")
                                         .font(.title3)
                                         .fontWeight(.black)
-                                    
                                     Text(" of the day")
                                         .font(.title3)
                                 }
                                 .foregroundColor(.white)
                             }
+                
+                        AsyncImage(url: music.artistArtworkURL)
+                            .frame(width: 330, height: 330, alignment: .center)
+                            .cornerRadius(16)
+                        
+                        VStack(spacing: 16) {
                             
-                            AsyncImage(url: music.artistArtworkURL)
-                                .frame(width: 330, height: 330, alignment: .center)
-                                .cornerRadius(16)
-                            
+                            VStack(spacing: 0) {
                                 
-                            
-                            HStack{
-                                VStack(spacing: 0) {
+                                HStack {
                                     Text(music.title ?? "Indisponível")
                                         .font(.title3)
                                         .fontWeight(.bold)
                                         .foregroundColor(.white)
+                                    
+                                    Spacer()
+                                    
+                                }
+                                
+                                HStack {
                                     Text(music.artistName ?? "Indisponível")
                                         .font(.headline)
                                         .fontWeight(.light)
                                         .foregroundColor(.white)
-
+                                    
+                                    Spacer()
                                 }
-                                Spacer()
                             }
                             
                             
-                            HStack {
+                            VStack(spacing: 0) {
+                                
+                                HStack {
 
-                                Button {
-                                    if player.getPlaybackStatus() == .playing {
-                                        imagem = "play.circle.fill"
-                                        player.pause()
-
-                                    } else {
-                                        if let musicKitSong = music.musicKitSong {
-                                            imagem = "pause.circle.fill"
-                                            if player.isPlayerQueueEmpty() {
+                                    Button {
+                                        play.toggle()
+                                        
+                                        switch play {
+                                        case false:
+                                            imagem = "play.circle.fill"
+                                            player.pause()
+                                        case true:
+                                            if (player.isPlayerQueueEmpty()) {
+                                                guard let musicKitSong = music.musicKitSong else { return }
                                                 player.playsSong(musica: musicKitSong)
+                                                imagem = "pause.circle.fill"
                                             }
                                             else {
                                                 player.resumeSong()
-                                            }
-                                        } else {
-                                            
-                                        }
-                                    }
-                                }
-                                
-                                
-                                Rectangle()
-                                    .fill(.white)
-                                    .frame(width: .infinity, height: 3)
-                                    .padding(.horizontal, 8)
-                                    .cornerRadius(24)
-                                
-                                Spacer()
-                                
-                                Text("-2:20")
-                                    .font(.footnote)
-                                    .foregroundColor(.white)
-                                    .frame(width: 40, height: 40)
-                            }
-                            
-                            ScrollView(.horizontal, showsIndicators: false){
-                                HStack{
-                                    ForEach(music.genreNames, id: \.self){ genre in
-                                        GenreView (text: genre)
-                                            
-                                            play.toggle()
-                                            
-                                            switch play {
-                                            case false:
                                                 imagem = "play.circle.fill"
-                                                player.pause()
-                                            case true:
-                                                if player.queue.entries.isEmpty {
-                                                    playsSong(musica: musica)
-                                                    imagem = "pause.circle.fill"
-                                                }
-                                                else {
-                                                    resumeSong()
-                                                    imagem = "play.circle.fill"
-                                                }
-                                            }
-                                            
-                                        } label: {
-                                            Image(systemName: imagem)
-                                                .resizable()
-                                                .frame(width: 40, height: 40)
-                                                .foregroundColor(.white)
-                                        }
-                                        
-                                        Spacer()
-                                        
-                                        // barra de progresso da musica
-                                        
-                                        ZStack {
-                                            Capsule().fill(Color.white.opacity(0.2)).frame(height: 5)
-                                            
-                                            HStack(spacing: 0) {
-                                                Capsule().fill(Color.white).frame(width: 50, height: 5)
-                                                
-                                                Spacer()
                                             }
                                         }
-                                        .padding(.horizontal, 4)
                                         
-                                        Spacer()
-                                        
-                                        Text("-2:20")
-                                            .font(.footnote)
-                                            .foregroundColor(.white)
+                                    } label: {
+                                        Image(systemName: imagem)
+                                            .resizable()
                                             .frame(width: 40, height: 40)
+                                            .foregroundColor(.white)
                                     }
                                     
+                                    Spacer()
                                     
-                                    HStack(spacing: 16) {
-                                        let infos = populateString(musica: musica)
-                                        ScrollView(.horizontal, showsIndicators: false){
-                                            HStack{
-                                                ForEach(infos, id: \.self){ info in
-                                                    GenreView (text: info)
-
-                                                }
-                                            }
-                                        }
-                                        .padding(.top, 8)
+                                    // barra de progresso da musica
+                                    
+                                    ZStack {
+                                        Capsule().fill(Color.white.opacity(0.2)).frame(height: 5)
                                         
-                                        VStack(spacing: 0) {
-                                            Spacer()
+                                        HStack(spacing: 0) {
+                                            Capsule().fill(Color.white).frame(width: 50, height: 5)
                                             
-                                            Button {
-                                                addsToPlaylist(musica: musica)
-                                            } label: {
-                                                
-                                                Image(systemName: "plus.app")
-                                                    .resizable()
-                                                    .frame(width: 18, height: 18)
-                                                    .foregroundColor(.white)
-                                                
+                                            Spacer()
+                                        }
+                                    }
+                                    .padding(.horizontal, 4)
+                                    
+                                    Spacer()
+                                    
+                                    Text("-2:20")
+                                        .font(.footnote)
+                                        .foregroundColor(.white)
+                                        .frame(width: 40, height: 40)
+                                }
+                                
+                                
+                                HStack(spacing: 16) {
+                                    let infos = populateString(song: music)
+                                    ScrollView(.horizontal, showsIndicators: false){
+                                        HStack{
+                                            ForEach(infos, id: \.self){ info in
+                                                GenreView (text: info)
+
                                             }
                                         }
-                                        .frame(width: 20, height: 17)
-                                        ShareLink(item: musica.url!) {
-                                            Image(systemName: "square.and.arrow.up")
-                                                .resizable()
-                                                .frame(width: 18, height: 24)
-                                                .foregroundColor(.white)
-                                           }
                                     }
+                                    .padding(.top, 8)
+                                    
+                                    VStack(spacing: 0) {
+                                        Spacer()
+                                        
+                                        Button {
+                                            guard let musicKitSong = music.musicKitSong else { return }
+                                            player.addsToPlaylist(musica: musicKitSong)
+                                        } label: {
+                                            
+                                            Image(systemName: "plus.app")
+                                                .resizable()
+                                                .frame(width: 18, height: 18)
+                                                .foregroundColor(.white)
+                                            
+                                        }
+                                    }
+                                    .frame(width: 20, height: 17)
+                                    ShareLink(item: music.songURL) {
+                                        Image(systemName: "square.and.arrow.up")
+                                            .resizable()
+                                            .frame(width: 18, height: 24)
+                                            .foregroundColor(.white)
+                                       }
                                 }
-
                             }
+
+                        }
+                            
+                            
                             
                             
                             
@@ -219,20 +201,16 @@ struct TrackView: View {
                                     .foregroundColor(.white)
                                 Spacer()
                             }
-                            HStack {
-                                VStack (alignment: .leading){
-                                    Text("Álbum")
-                                        .bold()
-                                        .foregroundColor(.gray)
-                                        .font(.system(size: 24))
-                                    Text (music.albumTitle ?? "Indisponivel")
-                                        .padding(.bottom, 16)
-                                    Text("Compositor")
-                                        .bold()
-                                        .foregroundColor(.gray)
-                                        .font(.system(size: 24))
-                                    Text (music.composerName ?? "Indisponível")
-                                        .padding(.bottom, 16)
+                            Text("""
+    Lorem ipsum dolor sit amet. Vel animi libero qui tempore dolores aut animi libero in quibusdam minus non quia fuga aut dolor corrupti. Hic excepturi nihil qui adipisci earum sit iure galisum id atque laudantium est nihil eligendi. Est optio internos aut amet tempora sit neque doloremque vel provident voluptate ea nisi modi ea labore delectus. Quo laboriosam commodi aut quod obcaecati sit magni impedit.
+    """)
+                                .font(.footnote)
+                                .foregroundColor(.white)
+                            
+                            ScrollView(.horizontal, showsIndicators: false){
+                                HStack{
+                                    ForEach(1..<6) { i in             CardView()
+                                    }
                                 }
                             }
                             
@@ -243,13 +221,26 @@ struct TrackView: View {
                     .padding()
                 }
             }
+            
         }
-        .background(self.bgColor)
+        .toolbar(.hidden, for: .tabBar)
+        .background(viewModel.bgColor)
         .opacity(0.9)
         .onAppear {
             viewModel.fetchMusic()
             
         }
+        
+    }
+    
+    func populateString (song: AppleMusicSong) -> [String]{
+        var aux = [String]()
+        aux.append(song.genreNames.first ?? "Indisponível")
+        aux.append(song.albumTitle ?? "Indisponível")
+        let data = DateFormatter()
+        data.dateFormat = "YYYY"
+        aux.append(data.string(from: song.releaseDate!) )
+        return aux
     }
     
     func populateString (musica: Song) -> [String]{

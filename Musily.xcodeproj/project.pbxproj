@@ -15,6 +15,11 @@
 		C17B20C12A43195C006EDAF7 /* MusilyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B20C02A43195C006EDAF7 /* MusilyTests.swift */; };
 		C17B20CB2A43195C006EDAF7 /* MusilyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B20CA2A43195C006EDAF7 /* MusilyUITests.swift */; };
 		C17B20CD2A43195C006EDAF7 /* MusilyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B20CC2A43195C006EDAF7 /* MusilyUITestsLaunchTests.swift */; };
+		C1ADF4602A4F6473000138B5 /* Onboarding1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ADF45F2A4F6473000138B5 /* Onboarding1View.swift */; };
+		C1ADF4622A4F64A2000138B5 /* Onboarding2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ADF4612A4F64A2000138B5 /* Onboarding2View.swift */; };
+		C1ADF4642A4F650A000138B5 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ADF4632A4F650A000138B5 /* CardView.swift */; };
+		C1ADF4662A4F6590000138B5 /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ADF4652A4F6590000138B5 /* IntroView.swift */; };
+		C1ADF4682A4F65B1000138B5 /* OnboardingTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ADF4672A4F65B1000138B5 /* OnboardingTabView.swift */; };
 		C1C86DA12A49B68C00BD6E81 /* AppleMusicSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C86DA02A49B68C00BD6E81 /* AppleMusicSong.swift */; };
 		C1C86DA42A4A987300BD6E81 /* InstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C86DA32A4A987300BD6E81 /* InstructionsView.swift */; };
 		C1C86DA62A4A9A0D00BD6E81 /* SubscribeToAppleMusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C86DA52A4A9A0D00BD6E81 /* SubscribeToAppleMusicView.swift */; };
@@ -62,6 +67,11 @@
 		C17B20C62A43195C006EDAF7 /* MusilyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MusilyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C17B20CA2A43195C006EDAF7 /* MusilyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusilyUITests.swift; sourceTree = "<group>"; };
 		C17B20CC2A43195C006EDAF7 /* MusilyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusilyUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C1ADF45F2A4F6473000138B5 /* Onboarding1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding1View.swift; sourceTree = "<group>"; };
+		C1ADF4612A4F64A2000138B5 /* Onboarding2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding2View.swift; sourceTree = "<group>"; };
+		C1ADF4632A4F650A000138B5 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		C1ADF4652A4F6590000138B5 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
+		C1ADF4672A4F65B1000138B5 /* OnboardingTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTabView.swift; sourceTree = "<group>"; };
 		C1C86DA02A49B68C00BD6E81 /* AppleMusicSong.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicSong.swift; sourceTree = "<group>"; };
 		C1C86DA22A4A96B200BD6E81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C1C86DA32A4A987300BD6E81 /* InstructionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsView.swift; sourceTree = "<group>"; };
@@ -212,6 +222,11 @@
 				FE4E95AB2A4C76F80009B304 /* GenreView.swift */,
 				FE39C6CB2A4B0D51007B475E /* InfoView.swift */,
 				C1C86DB62A4EF70400BD6E81 /* TrackView */,
+				C1ADF45F2A4F6473000138B5 /* Onboarding1View.swift */,
+				C1ADF4612A4F64A2000138B5 /* Onboarding2View.swift */,
+				C1ADF4632A4F650A000138B5 /* CardView.swift */,
+				C1ADF4652A4F6590000138B5 /* IntroView.swift */,
+				C1ADF4672A4F65B1000138B5 /* OnboardingTabView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -359,12 +374,16 @@
 				C17B20B02A43195B006EDAF7 /* MusilyApp.swift in Sources */,
 				C1C86DBD2A4F149B00BD6E81 /* AppleMusicPlayer.swift in Sources */,
 				C1C86DB42A4DC29800BD6E81 /* NetworkError.swift in Sources */,
+				C1ADF4642A4F650A000138B5 /* CardView.swift in Sources */,
 				C1C86DA12A49B68C00BD6E81 /* AppleMusicSong.swift in Sources */,
 				C1C86DB22A4DC1E900BD6E81 /* ChatGPTAnswer.swift in Sources */,
+				C1ADF4662A4F6590000138B5 /* IntroView.swift in Sources */,
 				C1C86DA62A4A9A0D00BD6E81 /* SubscribeToAppleMusicView.swift in Sources */,
-				FECBEEFA2A4DA58400F3B3FD /* CardView.swift in Sources */,
+				C1ADF4682A4F65B1000138B5 /* OnboardingTabView.swift in Sources */,
 				C1C86DBB2A4EF83A00BD6E81 /* MediaInformationCard.swift in Sources */,
 				FE4E95AA2A4C66DB0009B304 /* UIColor+.swift in Sources */,
+				C1ADF4622A4F64A2000138B5 /* Onboarding2View.swift in Sources */,
+				C1ADF4602A4F6473000138B5 /* Onboarding1View.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

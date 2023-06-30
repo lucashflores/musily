@@ -1,10 +1,3 @@
-//
-//  GenreView.swift
-//  Musily
-//
-//  Created by Tiago Mendes Bottamedi on 28/06/23.
-//
-
 import SwiftUI
 
 struct GenreView: View {

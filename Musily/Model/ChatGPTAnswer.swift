@@ -1,10 +1,3 @@
-//
-//  ChatGPTAnswer.swift
-//  Musily
-//
-//  Created by Lucas Flores on 29/06/23.
-//
-
 import Foundation
 
 struct Message: Codable {

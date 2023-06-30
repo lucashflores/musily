@@ -1,10 +1,3 @@
-//
-//  MediaInformationCard.swift
-//  Musily
-//
-//  Created by Lucas Flores on 30/06/23.
-//
-
 import Foundation
 
 

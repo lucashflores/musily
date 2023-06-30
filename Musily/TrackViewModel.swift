@@ -1,10 +1,3 @@
-//
-//  TrackViewModel.swift
-//  Musily
-//
-//  Created by Lucas Flores on 30/06/23.
-//
-
 import Foundation
 import MusicKit
 import UIKit
@@ -19,7 +12,6 @@ class TrackViewModel: ObservableObject {
     }
     
     func fetchMusic()  {
-        
         Task {
             DispatchQueue.main.async {
                 self.isLoading = true
@@ -43,23 +35,30 @@ class TrackViewModel: ObservableObject {
                     let songWithArtists = try await songResponse.items.first?.with([.artists])
                     DispatchQueue.main.async {
                         
-                        self.song = songWithArtists.map({ song in
-                            return AppleMusicSong(title: song.title, albumTitle: song.albumTitle , genreNames: song.genreNames.filter({ genre in
+                        let fetchedSong = songWithArtists.map({ song in
+                            return AppleMusicSong(title: song.title, releaseDate: song.releaseDate, albumTitle: song.albumTitle , genreNames: song.genreNames.filter({ genre in
                                 return genre != "Music"
-                            }), artistName: song.artistName, composerName: song.composerName!, artistArtworkURL: (song.artwork?.url(width: 330, height: 330))!, albumArtworkURL: (song.artwork?.url(width: 300, height: 300))!)
+                            }), artistName: song.artistName, composerName: song.composerName!, artistArtworkURL: (song.artwork?.url(width: 330, height: 330))!, albumArtworkURL: (song.artwork?.url(width: 300, height: 300))!, songURL: song.url!)
                         })
-                        print(String(describing: self.song))
-                        
+                        guard let fetchedSong else { return }
+                        self.song = fetchedSong
+                        let data = try? Data(contentsOf: self.song!.albumArtworkURL)
+                        let image = UIImage(data: data!)
+                        self.bgColor = Color(uiColor: image!.averageColor!)
+
                     }
-                    break
+
+                    
                 } catch {
                     print(error)
                 }
             default:
-                self.song = AppleMusicSong.getDefault()
                 break
             }
+            
+            
             DispatchQueue.main.async {
+                
                 self.isLoading = false
             }
         }
@@ -69,13 +68,6 @@ class TrackViewModel: ObservableObject {
         Task {
             
         }
-    }
-    
-    func getBackgroundColor() {
-        let url = self.song?.albumArtworkURL
-        let data = try? Data(contentsOf: url!)
-        let image = UIImage(data: data!)
-        self.bgColor = Color(uiColor: image!.averageColor!)
     }
     
     func fetchAboutContent() { }
