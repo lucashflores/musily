@@ -11,22 +11,22 @@ import MediaPlayer
 
 
 struct TrackView: View {
-    @ObservedObject var musicGetter = MusicGetter()
+    var cards: [MediaInformationCard]?
+    private var player = AppleMusicPlayer()
+    @ObservedObject private var viewModel: TrackViewModel = TrackViewModel()
     @State var imagem = "play.circle.fill"
     @State var share = "square.and.arrow.up"
     @State var bgColor = Color("bkDarkColor")
-    @State var play = false
-    private let copia = UIPasteboard.general
-
-    let player = ApplicationMusicPlayer.shared
+    
     
     var body: some View {
-        if let musica = musicGetter.song {
+        ZStack { 
+            if (viewModel.isLoading) {
+                ProgressView().progressViewStyle(.circular)
+            }
+            else if let music = viewModel.song {
             
-            ZStack {
-                
                 VStack(spacing: 0) {
-                    
                     Rectangle()
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .foregroundColor(Color(uiColor: .clear))
@@ -59,54 +59,69 @@ struct TrackView: View {
                                 .foregroundColor(.white)
                             }
                             
-                            AsyncImage(url: musica.artists?.first?.artwork?.url(width: 330, height: 330))
+                            AsyncImage(url: music.artistArtworkURL)
                                 .frame(width: 330, height: 330, alignment: .center)
                                 .cornerRadius(16)
                             
-                            VStack(spacing: 16) {
                                 
+                            
+                            HStack{
                                 VStack(spacing: 0) {
-                                    
-                                    HStack {
-                                        Text(musica.title)
-                                            .font(.title3)
-                                            .fontWeight(.bold)
-                                            .foregroundColor(.white)
-                                        
-                                        Spacer()
-                                        
-                                    }
-                                    
-                                    HStack {
-                                        Text(musica.artistName)
-                                            .font(.headline)
-                                            .fontWeight(.light)
-                                            .foregroundColor(.white)
-                                        
-                                        Spacer()
+                                    Text(music.title ?? "Indisponível")
+                                        .font(.title3)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                    Text(music.artistName ?? "Indisponível")
+                                        .font(.headline)
+                                        .fontWeight(.light)
+                                        .foregroundColor(.white)
+
+                                }
+                                Spacer()
+                            }
+                            
+                            
+                            HStack {
+
+                                Button {
+                                    if player.getPlaybackStatus() == .playing {
+                                        imagem = "play.circle.fill"
+                                        player.pause()
+
+                                    } else {
+                                        if let musicKitSong = music.musicKitSong {
+                                            imagem = "pause.circle.fill"
+                                            if player.isPlayerQueueEmpty() {
+                                                player.playsSong(musica: musicKitSong)
+                                            }
+                                            else {
+                                                player.resumeSong()
+                                            }
+                                        } else {
+                                            
+                                        }
                                     }
                                 }
                                 
                                 
-                                VStack(spacing: 0) {
-                                    
-                                    HStack {
-
-                                        Button {
-//                                            if player.state.playbackStatus == .playing {
-//                                                imagem = "play.circle.fill"
-//                                                player.pause()
-//
-//                                            } else {
-//                                                imagem = "pause.circle.fill"
-//                                                if player.queue.entries.isEmpty {
-//                                                    playsSong(musica: musica)
-//                                                }
-//                                                else {
-//                                                    resumeSong()
-//                                                    imagem = "play.circle.fill"
-//                                                }
-//                                            }
+                                Rectangle()
+                                    .fill(.white)
+                                    .frame(width: .infinity, height: 3)
+                                    .padding(.horizontal, 8)
+                                    .cornerRadius(24)
+                                
+                                Spacer()
+                                
+                                Text("-2:20")
+                                    .font(.footnote)
+                                    .foregroundColor(.white)
+                                    .frame(width: 40, height: 40)
+                            }
+                            
+                            ScrollView(.horizontal, showsIndicators: false){
+                                HStack{
+                                    ForEach(music.genreNames, id: \.self){ genre in
+                                        GenreView (text: genre)
                                             
                                             play.toggle()
                                             
@@ -204,16 +219,20 @@ struct TrackView: View {
                                     .foregroundColor(.white)
                                 Spacer()
                             }
-                            Text("""
-    Lorem ipsum dolor sit amet. Vel animi libero qui tempore dolores aut animi libero in quibusdam minus non quia fuga aut dolor corrupti. Hic excepturi nihil qui adipisci earum sit iure galisum id atque laudantium est nihil eligendi. Est optio internos aut amet tempora sit neque doloremque vel provident voluptate ea nisi modi ea labore delectus. Quo laboriosam commodi aut quod obcaecati sit magni impedit.
-    """)
-                                .font(.footnote)
-                                .foregroundColor(.white)
-                            
-                            ScrollView(.horizontal, showsIndicators: false){
-                                HStack{
-                                    ForEach(1..<6) { i in             CardView()
-                                    }
+                            HStack {
+                                VStack (alignment: .leading){
+                                    Text("Álbum")
+                                        .bold()
+                                        .foregroundColor(.gray)
+                                        .font(.system(size: 24))
+                                    Text (music.albumTitle ?? "Indisponivel")
+                                        .padding(.bottom, 16)
+                                    Text("Compositor")
+                                        .bold()
+                                        .foregroundColor(.gray)
+                                        .font(.system(size: 24))
+                                    Text (music.composerName ?? "Indisponível")
+                                        .padding(.bottom, 16)
                                 }
                             }
                             
@@ -224,54 +243,12 @@ struct TrackView: View {
                     .padding()
                 }
             }
-            .toolbar(.hidden, for: .tabBar)
-            .background(bgColor)
-            .opacity(0.9)
-            .onAppear {
-                let url = musica.artwork?.url(width: 300, height: 300)
-                
-                DispatchQueue.global().async {
-                    let data = try? Data(contentsOf: url!)
-                    DispatchQueue.main.async {
-                        let image = UIImage(data: data!)
-                        bgColor = Color(uiColor: image!.averageColor!)
-                    }
-                }
-                
-            }
-            
-            
-            
-        }else {
-            ProgressView()
-                .progressViewStyle(.circular)
         }
-    }
-    
-    func playsMusic(musica : Song) async {
-        do{
-            player.queue = [musica]
-            try await player.prepareToPlay()
-            try await player.play()
-        } catch {
-            print(error)
-        }
-    }
-    
-    func resumeSong() {
-        Task {
-            do {
-                try await player.play()
-            }
-            catch {
-                
-            }
-        }
-    }
-    
-    func playsSong (musica : Song) {
-        Task {
-            await playsMusic(musica: musica)
+        .background(self.bgColor)
+        .opacity(0.9)
+        .onAppear {
+            viewModel.fetchMusic()
+            
         }
     }
     
