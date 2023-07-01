@@ -1,24 +1,5 @@
 import SwiftUI
 import MusicKit
-import MediaPlayer
-
-//
-//  TrackView.swift
-//  Musily
-//
-//  Created by Isabela Bastos Jastrombek on 22/06/23.
-//
-
-import SwiftUI
-import MusicKit
-import MediaPlayer
-
-
-    
-
-//
-
-
 
 struct TrackView: View {
     var cards: [MediaInformationCard]?
@@ -31,8 +12,8 @@ struct TrackView: View {
     var body: some View {
         
         ZStack {
-            if (viewModel.isLoading) {
-                ProgressView().progressViewStyle(.circular)
+            if (viewModel.song == nil) {
+                ProgressView()
             }
             else if let music = viewModel.song {
                 VStack(spacing: 0) {
@@ -201,15 +182,33 @@ struct TrackView: View {
                                     .foregroundColor(.white)
                                 Spacer()
                             }
-                            Text("""
-    Lorem ipsum dolor sit amet. Vel animi libero qui tempore dolores aut animi libero in quibusdam minus non quia fuga aut dolor corrupti. Hic excepturi nihil qui adipisci earum sit iure galisum id atque laudantium est nihil eligendi. Est optio internos aut amet tempora sit neque doloremque vel provident voluptate ea nisi modi ea labore delectus. Quo laboriosam commodi aut quod obcaecati sit magni impedit.
-    """)
-                                .font(.footnote)
-                                .foregroundColor(.white)
-                            
+                            if (viewModel.artistInfo != nil)
+                            {
+                                Text(viewModel.artistInfo ?? "Indispnível")
+                                    .font(.footnote)
+                                    .foregroundColor(.white)
+                            }
+                            else {
+                                ProgressView()
+                            }
                             ScrollView(.horizontal, showsIndicators: false){
                                 HStack{
-                                    ForEach(1..<6) { i in             CardView()
+                                    if let allGenreInformation = viewModel.allGenreInformation, let albumInfo = viewModel.albumInfo, let albums = viewModel.albums {
+                                        CardView(cardInfo: MediaInformationCard(title: "The Album", content: albumInfo))
+                                        ForEach(allGenreInformation)
+                                        { genre in
+                                            CardView(cardInfo: MediaInformationCard(title: "The Genre - \(genre.genreName)", content: genre.genreInfo ?? "loading"))
+
+                                        }
+                                        
+                                        ForEach(albums)
+                                        { album in
+                                            AlbumCardView(albumCardInfo: album)
+
+                                        }
+                                    }
+                                    else {
+                                        ProgressView()
                                     }
                                 }
                             }
@@ -221,21 +220,18 @@ struct TrackView: View {
                     .padding()
                 }
             }
-            
         }
         .toolbar(.hidden, for: .tabBar)
         .background(viewModel.bgColor)
         .opacity(0.9)
-        .onAppear {
-            viewModel.fetchMusic()
-            
+        .onAppear() {
+            viewModel.fetchContent()
         }
         
     }
     
     func populateString (song: AppleMusicSong) -> [String]{
-        var aux = [String]()
-        aux.append(song.genreNames.first ?? "Indisponível")
+        var aux = song.genreNames
         aux.append(song.albumTitle ?? "Indisponível")
         let data = DateFormatter()
         data.dateFormat = "YYYY"
