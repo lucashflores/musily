@@ -77,7 +77,6 @@ class TrackViewModel: ObservableObject {
                 case .success(let answer):
                     DispatchQueue.main.async {
                         self.artistInfo = self.formatAnswer(answer: answer)
-                    }
                 case .failure(let error):
                     print(String(describing: error))
                 }

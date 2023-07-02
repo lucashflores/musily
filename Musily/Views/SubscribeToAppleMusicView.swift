@@ -3,8 +3,10 @@ import SwiftUI
 struct SubscribeToAppleMusicView: View {
     @Binding var isPresented : Bool
     var body: some View {
-        Text("Subscribe to Apple Music.")
- musicSubscriptionOffer(isPresented: $isPresented)
+        VStack{
+            Text ("You need Apple Music to have access to this function")
+        }
+        .musicSubscriptionOffer(isPresented: $isPresented)
     }
 }
 

@@ -4,6 +4,7 @@ import MediaPlayer
 
 struct ContentView: View {
     @State var authStatus: AuthStatus = .fetchingAuth
+    @State var offer : Bool = false
     @State var showOnboarding: Bool = true
     var body: some View {
         NavigationView {
@@ -14,14 +15,17 @@ struct ContentView: View {
                         .progressViewStyle(.circular)
                 case .noMediaLibraryPermission:
                     InstructionsView()
-                case .noAppleMusicSubscription:
-                    SubscribeToAppleMusicView(isPresented: .constant(true))
+//                case .noAppleMusicSubscription:
+//                    SubscribeToAppleMusicView(isPresented: .constant(true))
                 default:
-                    TrackView()
+                    TrackView(isPresented: $offer)
                     
                 }
             }
-            .onAppear(perform: getAuth)
+            .onChange(of: showOnboarding, perform: { newValue in
+                getAuth()
+            })
+            .onAppear(perform: authNotification)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .fullScreenCover(isPresented: $showOnboarding) {
@@ -66,6 +70,29 @@ struct ContentView: View {
             }
         }
     }
+    
+    func authNotification (){
+            Task{
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                   if success {
+                       UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                       let content = UNMutableNotificationContent()
+                       content.title = "Disc"
+                       content.body = "Checkout your DISCovery of the day!"
+                       var dateComponents = DateComponents()
+                       dateComponents.hour = 0
+                       dateComponents.minute = 0
+                       dateComponents.second = 0
+                       let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+                       let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                       UNUserNotificationCenter.current().add(request)
+                       print("User Accepted")
+                   } else if let error = error {
+                       print(error.localizedDescription)
+                  }
+                }
+            }
+        }
 }
 
 enum AuthStatus {
