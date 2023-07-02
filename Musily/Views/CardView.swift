@@ -1,16 +1,19 @@
 import SwiftUI
 
 struct CardView: View {
+    var cardInfo: MediaInformationCard
+
+    
     var body: some View {
-            VStack (alignment: .leading){
-                Text("Lorem ipsum dolor sit amet. Vel animi libero qui tempore dolores aut animi libero in quibusdam minus non quia fuga aut dolor corrupti. Hic excepturi nihil qui adipisci earum sit iure galisum id atque laudantium est nihil eligendi. Est optio internos aut amet tempora sit neque doloremque vel provident voluptate ea nisi modi ea labore delectus. Quo laboriosam commodi aut quod obcaecati sit magni impedit.")
-                    .foregroundColor(.white)
-                    .font(.caption)
-                Spacer()
-                Text ("The Album")
-                    .foregroundColor(.white)
-                    .font(.title2)
-                    .bold()
+        VStack (alignment: .leading){
+            Text(cardInfo.content)
+                .foregroundColor(.white)
+                .font(.caption)
+            Spacer()
+            Text (cardInfo.title)
+                .foregroundColor(.white)
+                .font(.title2)
+                .bold()
                 
             }
             .padding()
@@ -24,6 +27,6 @@ struct CardView: View {
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView()
+        CardView(cardInfo: MediaInformationCard(title: "The Genre", content: "O gênero de música Pop é caracterizado por suas melodias cativantes, letras simplistas e estruturas musicais acessíveis. Originado na década de 1950, o Pop se tornou um dos gêneros mais populares do mundo, abrangendo uma ampla variedade de estilos musicais e influências. Suas canções geralmente enfatizam temas universais como amor, felicidade e juventude, visando um apelo comercial massivo."))
     }
 }
