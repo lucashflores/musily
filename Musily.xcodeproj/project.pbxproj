@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		5AEBF15C2A446AE4003D9252 /* TrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEBF15B2A446AE4003D9252 /* TrackView.swift */; };
+		C16C40422A50C3F60038D6AD /* AppleMusicGenre.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16C40412A50C3F60038D6AD /* AppleMusicGenre.swift */; };
+		C16C40442A50CB110038D6AD /* AppleMusicAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16C40432A50CB110038D6AD /* AppleMusicAlbum.swift */; };
+		C16C40462A50CC960038D6AD /* AlbumCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16C40452A50CC960038D6AD /* AlbumCardView.swift */; };
 		C17B20B02A43195B006EDAF7 /* MusilyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B20AF2A43195B006EDAF7 /* MusilyApp.swift */; };
 		C17B20B22A43195B006EDAF7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B20B12A43195B006EDAF7 /* ContentView.swift */; };
 		C17B20B42A43195C006EDAF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C17B20B32A43195C006EDAF7 /* Assets.xcassets */; };
@@ -54,6 +57,9 @@
 
 /* Begin PBXFileReference section */
 		5AEBF15B2A446AE4003D9252 /* TrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackView.swift; sourceTree = "<group>"; };
+		C16C40412A50C3F60038D6AD /* AppleMusicGenre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicGenre.swift; sourceTree = "<group>"; };
+		C16C40432A50CB110038D6AD /* AppleMusicAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicAlbum.swift; sourceTree = "<group>"; };
+		C16C40452A50CC960038D6AD /* AlbumCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCardView.swift; sourceTree = "<group>"; };
 		C17B20AC2A43195B006EDAF7 /* Musily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Musily.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C17B20AF2A43195B006EDAF7 /* MusilyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusilyApp.swift; sourceTree = "<group>"; };
 		C17B20B12A43195B006EDAF7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -118,6 +124,8 @@
 				C1C86DB12A4DC1E900BD6E81 /* ChatGPTAnswer.swift */,
 				C1C86DB32A4DC29800BD6E81 /* NetworkError.swift */,
 				C1C86DBA2A4EF83A00BD6E81 /* MediaInformationCard.swift */,
+				C16C40412A50C3F60038D6AD /* AppleMusicGenre.swift */,
+				C16C40432A50CB110038D6AD /* AppleMusicAlbum.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -215,6 +223,7 @@
 				C1ADF4632A4F650A000138B5 /* CardView.swift */,
 				C1ADF4652A4F6590000138B5 /* IntroView.swift */,
 				C1ADF4672A4F65B1000138B5 /* OnboardingTabView.swift */,
+				C16C40452A50CC960038D6AD /* AlbumCardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -352,10 +361,12 @@
 				C1C86DB82A4EF74600BD6E81 /* TrackViewModel.swift in Sources */,
 				FE39C6CC2A4B0D51007B475E /* InfoView.swift in Sources */,
 				C1C86DA42A4A987300BD6E81 /* InstructionsView.swift in Sources */,
+				C16C40422A50C3F60038D6AD /* AppleMusicGenre.swift in Sources */,
 				C17B20B22A43195B006EDAF7 /* ContentView.swift in Sources */,
 				C1C86DB02A4DAF8000BD6E81 /* NetworkManager.swift in Sources */,
 				FE4E95AC2A4C76F80009B304 /* GenreView.swift in Sources */,
 				5AEBF15C2A446AE4003D9252 /* TrackView.swift in Sources */,
+				C16C40442A50CB110038D6AD /* AppleMusicAlbum.swift in Sources */,
 				C17B20B02A43195B006EDAF7 /* MusilyApp.swift in Sources */,
 				C1C86DBD2A4F149B00BD6E81 /* AppleMusicPlayer.swift in Sources */,
 				C1C86DB42A4DC29800BD6E81 /* NetworkError.swift in Sources */,
@@ -368,6 +379,7 @@
 				C1ADF4682A4F65B1000138B5 /* OnboardingTabView.swift in Sources */,
 				C1C86DBB2A4EF83A00BD6E81 /* MediaInformationCard.swift in Sources */,
 				FE4E95AA2A4C66DB0009B304 /* UIColor+.swift in Sources */,
+				C16C40462A50CC960038D6AD /* AlbumCardView.swift in Sources */,
 				C1ADF4622A4F64A2000138B5 /* Onboarding2View.swift in Sources */,
 				C1ADF4602A4F6473000138B5 /* Onboarding1View.swift in Sources */,
 			);

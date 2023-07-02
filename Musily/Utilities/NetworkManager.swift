@@ -4,7 +4,7 @@ class NetworkManager {
     public static let shared = NetworkManager()
     
     func askChatGPT(prompt: String, completed: @escaping (Result<String, NetworkError>) -> Void) async {
-        let apiKey = "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"
+        let apiKey = "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"
         let model = "gpt-3.5-turbo"
         let temperature = 0.9
         let maxTokens = 150
@@ -33,14 +33,17 @@ class NetworkManager {
                 completed(.failure(.badServerResponse))
                 return
             }
-            
+//            print(String(data: data, encoding: .utf8))
             guard (200 ... 299) ~= response.statusCode else {                    // check for http errors
                 completed(.failure(.invalidStatusCode))
                 return
             }
             
             do {
+//                print("aaaaaaaaa")
+                
                 let responseObject = try JSONDecoder().decode(ChatGPTAnswer.self, from: data)
+                
                 guard let answer = responseObject.choices.first?.message.content else {
                     completed(.failure(.invalidData))
                     return
@@ -48,6 +51,7 @@ class NetworkManager {
                 completed(.success(answer))
                 return
             } catch {
+                print(error)
                 completed(.failure(.invalidData))
                 return
             }
