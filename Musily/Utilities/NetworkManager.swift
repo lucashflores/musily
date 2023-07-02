@@ -2,62 +2,33 @@ import Foundation
 
 class NetworkManager {
     public static let shared = NetworkManager()
+    private var apiKey = "1022157a16dd78bde564ece99bed68b2"
     
-    func askChatGPT(prompt: String, completed: @escaping (Result<String, NetworkError>) -> Void) async {
-        let apiKey = "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"
-        let model = "gpt-3.5-turbo"
-        let temperature = 0.9
-        let maxTokens = 150
-
-        let requestBody : [String : Any] = [
-            "model": model,
-            "messages": [["role": "user", "content": prompt]],
-            "temperature": temperature,
-            "max_tokens": maxTokens,
-        ]
-
-        let jsonData = try? JSONSerialization.data(withJSONObject: requestBody)
-
-        var request = URLRequest(url: URL(string: "https://api.openai.com/v1/chat/completions")!)
-        request.httpMethod = "POST"
+    func getArtistInfo(artistName: String, completed: @escaping (Result<LastFMArtistResponse, NetworkError>) -> Void) {
+        let requestURL = "https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=\(artistName)&api_key=\(apiKey)&format=json"
+        makeLastFMRequest(requestURL: requestURL, responseType: LastFMArtistResponse.self, completed: completed)
+    }
+    
+    func getAlbumInfo(artistName: String, albumTitle: String, completed: @escaping (Result<LastFMAlbumResponse, NetworkError>) -> Void) {
+        let requestURL = "https://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=\(apiKey)&artist=\(artistName)&album=\(albumTitle)&format=json"
+        makeLastFMRequest(requestURL: requestURL, responseType: LastFMAlbumResponse.self, completed: completed)
+    }
+    
+    func getTrackInfo(artistName: String, trackTitle: String, completed: @escaping (Result<LastFMTrackResponse, NetworkError>) -> Void) {
+        let requestURL = "https://ws.audioscrobbler.com/2.0/?method=track.getinfo&api_key=\(apiKey)&artist=\(artistName)&track=\(trackTitle)&format=json"
+        makeLastFMRequest(requestURL: requestURL, responseType: LastFMTrackResponse.self, completed: completed)
+    }
+    
+    func getGenreInfo(genre: String, completed: @escaping (Result<LastFMTagResponse, NetworkError>) -> Void) {
+        let requestURL = "https://ws.audioscrobbler.com/2.0/?method=tag.getinfo&api_key=\(apiKey)&tag=\(genre)&format=json"
+        makeLastFMRequest(requestURL: requestURL, responseType: LastFMTagResponse.self, completed: completed)
+    }
+    
+    func makeLastFMRequest<T: Codable>(requestURL: String, responseType: T.Type, completed: @escaping (Result<T, NetworkError>) -> Void) {
+        var request = URLRequest(url: URL(string: requestURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!)
+        request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-        request.httpBody = jsonData
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            
-            guard
-                let data = data,
-                let response = response as? HTTPURLResponse,
-                error == nil
-            else {                                                               // check for fundamental networking error
-                completed(.failure(.badServerResponse))
-                return
-            }
-//            print(String(data: data, encoding: .utf8))
-            guard (200 ... 299) ~= response.statusCode else {                    // check for http errors
-                completed(.failure(.invalidStatusCode))
-                return
-            }
-            
-            do {
-//                print("aaaaaaaaa")
-                
-                let responseObject = try JSONDecoder().decode(ChatGPTAnswer.self, from: data)
-                
-                guard let answer = responseObject.choices.first?.message.content else {
-                    completed(.failure(.invalidData))
-                    return
-                }
-                completed(.success(answer))
-                return
-            } catch {
-                print(error)
-                completed(.failure(.invalidData))
-                return
-            }
-        }
-
-        task.resume()
-        
+        let session = NetworkSession()
+        session.execute(responseType: responseType, request: request, completed: completed)
     }
 }
