@@ -17,12 +17,6 @@ struct Onboarding1View: View {
 
 
             VStack {
-                Image("disc")
-                    .resizable()
-                    .frame(maxWidth: .infinity)
-                    .scaledToFit()
-                    .padding(.horizontal, 60)
-
                 Spacer()
 
                 Text("DISC helps you make the journey of discovering new music and genres even more interesting.")

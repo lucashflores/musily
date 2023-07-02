@@ -7,16 +7,17 @@ class TrackViewModel: ObservableObject {
     @Published var song: AppleMusicSong?
     @Published var albums: [AppleMusicAlbum]?
     @Published var isSongLoading = false
-    @Published var bgColor = Color("bkDarkColor")
+    @Published var bgColor = Color(.white)
     @Published var artistInfo: String?
     @Published var albumInfo: String?
+    @Published var trackInfo: String?
     @Published var allGenreInformation: [GenreInfo]?
     
     
     init() {
     }
     
-    private func fetchMusic() async {
+    func fetchMusic() async {
         let status = await MusicAuthorization.request()
         switch status {
         case .authorized:
@@ -30,7 +31,7 @@ class TrackViewModel: ObservableObject {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "dd"
                 let day: Int = Int(dateFormatter.string(from: today)) ?? 1
-                let songId = plWithTracks?.tracks?[day - 1].id
+                let songId = plWithTracks?.tracks?[day - 2].id
                 let songRequest = MusicCatalogResourceRequest<Song>(matching: \.id, equalTo: songId ?? MusicItemID(rawValue: ""))
                 let songResponse = try await songRequest.response()
                 let songWithArtists = try await songResponse.items.first?.with([.artists])
@@ -38,7 +39,7 @@ class TrackViewModel: ObservableObject {
                     let fetchedSong = songWithArtists.map({ song in
                         return AppleMusicSong(title: song.title, releaseDate: song.releaseDate, albumTitle: song.albumTitle , genreNames: song.genreNames.filter({ genre in
                             return genre != "Music"
-                        }), artistName: song.artistName, composerName: song.composerName!, artistArtworkURL: (song.artwork?.url(width: 330, height: 330))!, albumArtworkURL: (song.artwork?.url(width: 300, height: 300))!, songURL: song.url!)
+                        }), artistName: song.artistName, composerName: song.composerName!, artistArtworkURL: (song.artwork?.url(width: 330, height: 330))!, albumArtworkURL: (song.artwork?.url(width: 300, height: 300))!, songURL: song.url!, musicKitSong: song)
                     })
                     guard let fetchedSong else { return }
                     self.song = fetchedSong
@@ -59,8 +60,10 @@ class TrackViewModel: ObservableObject {
                     })
                 }
 
+
                 
             } catch {
+                
                 print(error)
             }
         default:
@@ -68,67 +71,90 @@ class TrackViewModel: ObservableObject {
         }
     }
     
-    private func fetchInfo(artistName: String, albumTitle: String, genreNames: [String]) async {
-        let maxWordNumber = 40
-        if (artistName != "unavailable")
-        {
-            await NetworkManager.shared.askChatGPT(prompt: "me fale sobre o artista \(artistName) em no máximo 75 palavras") { result in
-                switch result {
-                case .success(let answer):
-                    DispatchQueue.main.async {
-                        self.artistInfo = self.formatAnswer(answer: answer)
-                case .failure(let error):
-                    print(String(describing: error))
-                }
+    func fetchInfo(trackTitle: String, artistName: String, albumTitle: String, genreNames: [String]) {
+        
+        func addDotAtTheEnd(info: String) -> String {
+            if (info.last != ".") {
+                return info + "."
             }
-            
-            if (albumTitle != "unavailable") {
-                await NetworkManager.shared.askChatGPT(prompt: "me fale sobre o álbum \(albumTitle) de \(artistName) em no máximo \(maxWordNumber) palavras") { result in
-                    switch result {
-                    case .success(let answer):
-                        DispatchQueue.main.async {
-                            self.albumInfo = self.formatAnswer(answer: answer)
-                        }
-                    case .failure(let error):
-                        print(String(describing: error))
-                    }
+            return info
+        }
+        
+        
+        NetworkManager.shared.getArtistInfo(artistName: artistName) {
+            result in
+            switch result {
+            case (.success(let artistResponse)):
+                DispatchQueue.main.async {
+                    self.artistInfo = addDotAtTheEnd(info: artistResponse.artist.bio.summary.replacingOccurrences(of: " <a(.*)", with: "", options: .regularExpression))
+                    
                 }
+            case(.failure(let error)):
+                print("artist")
+                print(error)
             }
         }
-        for genreName in genreNames {
-            if (genreName != "unavailable")
-            {
-                await NetworkManager.shared.askChatGPT(prompt: "me fale sobre o gênero de música \(genreName) em no máximo \(maxWordNumber) palavras") { result in
-                    switch result {
-                    case .success(let answer):
-                        DispatchQueue.main.async {
-                            if (self.allGenreInformation == nil) {
-                                self.allGenreInformation = []
-                            }
-                            self.allGenreInformation!.append(GenreInfo(genreName: genreName, genreInfo: answer))
-                        }
-                    case .failure(let error):
-                        print(String(describing: error))
-                    }
+        
+        NetworkManager.shared.getTrackInfo(artistName: artistName, trackTitle: trackTitle) {
+            result in
+            switch result {
+            case (.success(let trackResponse)):
+                DispatchQueue.main.async {
+                    self.trackInfo = addDotAtTheEnd(info: trackResponse.track.wiki.summary.replacingOccurrences(of: " <a(.*)", with: "", options: .regularExpression))
+                    
+                }
+            case(.failure(let error)):
+                print("track")
+                print(error)
+                DispatchQueue.main.async {
+                    self.artistInfo = "Indisponível"
                 }
             }
         }
         
-    }
-    
-    func formatAnswer(answer: String) -> String {
-        if (answer != "Nenhuma informação.") {
-            return answer.replacingOccurrences(of: " Nenhuma informação.", with: "")
+        NetworkManager.shared.getAlbumInfo(artistName: artistName, albumTitle: albumTitle) {
+            result in
+            switch result {
+            case (.success(let albumResponse)):
+                DispatchQueue.main.async {
+                    self.albumInfo = addDotAtTheEnd(info: albumResponse.album.wiki.summary.replacingOccurrences(of: " <a(.*)", with: "", options: .regularExpression))
+                }
+            case(.failure(let error)):
+                print("album")
+                print(error)
+                DispatchQueue.main.async {
+                    self.artistInfo = "Indisponível"
+                }
+            }
         }
-        return answer
+        
+        for genreName in genreNames {
+            NetworkManager.shared.getGenreInfo(genre: genreName) {
+                result in
+                switch result {
+                case (.success(let genreResponse)):
+                    if (self.allGenreInformation == nil) {
+                        DispatchQueue.main.async {
+                            self.allGenreInformation = []
+                        }
+                    }
+                    DispatchQueue.main.async {
+                        self.allGenreInformation?.append(GenreInfo(genreName: genreName, genreInfo: addDotAtTheEnd(info: genreResponse.tag.wiki.summary.replacingOccurrences(of: " <a(.*)", with: "", options: .regularExpression))))
+                        
+                    }
+                case(.failure(let error)):
+                    print(error)
+                }
+            }
+        }
     }
     
     func fetchContent() {
         Task {
             await self.fetchMusic()
-            while (self.song == nil){
-            }
-            await fetchInfo(artistName: song?.artistName ?? "unavailable", albumTitle: song?.albumTitle ?? "unavailable", genreNames: song?.genreNames ?? [])
+            guard let song = self.song else { return }
+            self.fetchInfo(trackTitle: song.title ?? "unavailable", artistName: song.artistName ?? "unavailable", albumTitle: song.albumTitle ?? "unavailable", genreNames: song.genreNames
+            )
         }
     }
 }
