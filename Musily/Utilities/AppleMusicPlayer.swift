@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 import MusicKit
 
 class AppleMusicPlayer {
@@ -33,7 +34,7 @@ class AppleMusicPlayer {
         }
     }
 
-    func playsSong (musica : Song) {
+    func playsSong (musica : Song, isPresented : Binding<Bool>) {
         Task {
             await playsMusic(musica: musica)
         }

@@ -2,7 +2,16 @@ import SwiftUI
 
 struct InstructionsView: View {
     var body: some View {
-        Text("You need to enable this app's access to Apple Music.")
+        VStack{
+            Text("You need to enable this app's access to Apple Music.")
+        }
+        .onAppear(perform: openURl) 
+    }
+    
+    func openURl(){
+        if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+            UIApplication.shared.open(settingsURL)
+        }
     }
 }
 

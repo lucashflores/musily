@@ -22,11 +22,11 @@ import MediaPlayer
 
 struct TrackView: View {
     var cards: [MediaInformationCard]?
-    private var player = AppleMusicPlayer()
-    @ObservedObject private var viewModel: TrackViewModel = TrackViewModel()
+    var player = AppleMusicPlayer()
+    @ObservedObject var viewModel: TrackViewModel = TrackViewModel()
     @State var imagem = "play.circle.fill"
     @State var play = false
-    
+    @Binding var isPresented : Bool
     
     var body: some View {
         
@@ -109,8 +109,9 @@ struct TrackView: View {
                                             player.pause()
                                         case true:
                                             if (player.isPlayerQueueEmpty()) {
+                                                offerMusic()
                                                 guard let musicKitSong = music.musicKitSong else { return }
-                                                player.playsSong(musica: musicKitSong)
+                                                player.playsSong(musica: musicKitSong, isPresented : $isPresented)
                                                 imagem = "pause.circle.fill"
                                             }
                                             else {
@@ -223,6 +224,7 @@ struct TrackView: View {
             }
             
         }
+        .musicSubscriptionOffer(isPresented: $isPresented)
         .toolbar(.hidden, for: .tabBar)
         .background(viewModel.bgColor)
         .opacity(0.9)
@@ -232,6 +234,17 @@ struct TrackView: View {
         }
         
     }
+    
+    func offerMusic(){
+        Task{
+            let status = try await MusicSubscription.current
+            if status.canBecomeSubscriber{
+                isPresented.toggle()
+                play = false
+            }
+        }
+    }
+    
     
     func populateString (song: AppleMusicSong) -> [String]{
         var aux = [String]()
@@ -264,6 +277,6 @@ struct TrackView: View {
 
 struct TrackView_Previews: PreviewProvider {
     static var previews: some View {
-        TrackView()
+        TrackView(isPresented: .constant(false))
     }
 }

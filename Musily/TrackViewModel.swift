@@ -50,7 +50,9 @@ class TrackViewModel: ObservableObject {
 
                     
                 } catch {
-                    print(error)
+                    DispatchQueue.main.async {
+                        self.song = AppleMusicSong.getDefault()
+                    }
                 }
             default:
                 break
