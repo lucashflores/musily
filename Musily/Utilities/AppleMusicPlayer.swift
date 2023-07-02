@@ -3,7 +3,24 @@ import SwiftUI
 import MusicKit
 
 class AppleMusicPlayer {
-    private var player: ApplicationMusicPlayer = ApplicationMusicPlayer.shared
+    var player: ApplicationMusicPlayer = ApplicationMusicPlayer.shared
+    
+    func updateInfo (value : Float){
+        Task{
+            if player.state.playbackStatus == .playing{
+                player.stop()
+                player.playbackTime = TimeInterval (value)
+                try await player.play()
+            }
+            else {
+                player.playbackTime = TimeInterval (value)
+            }
+        }
+    }
+    
+    func getPlaybackTime() -> TimeInterval {
+        return player.playbackTime
+    }
     
     func getPlaybackStatus() -> MusicPlayer.PlaybackStatus {
         return player.state.playbackStatus
@@ -34,7 +51,7 @@ class AppleMusicPlayer {
         }
     }
 
-    func playsSong (musica : Song, isPresented : Binding<Bool>) {
+    func playsSong (musica : Song) {
         Task {
             await playsMusic(musica: musica)
         }

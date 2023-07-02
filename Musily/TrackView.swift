@@ -4,10 +4,15 @@ import MusicKit
 struct TrackView: View {
     var cards: [MediaInformationCard]?
     var player = AppleMusicPlayer()
+    @State var options = MusicSubscriptionOffer.Options(
+        messageIdentifier: .playMusic
+    )
+    @State var sliderValue : Float = 0.0
     @ObservedObject var viewModel: TrackViewModel = TrackViewModel()
     @State var imagem = "play.circle.fill"
     @State var play = false
     @Binding var isPresented : Bool
+    @State var duration : Float = 0.0
     
     var body: some View {
         
@@ -92,7 +97,7 @@ struct TrackView: View {
                                             if (player.isPlayerQueueEmpty()) {
                                                 offerMusic()
                                                 guard let musicKitSong = music.musicKitSong else { return }
-                                                player.playsSong(musica: musicKitSong, isPresented : $isPresented)
+                                                player.playsSong(musica: musicKitSong)
                                                 imagem = "pause.circle.fill"
                                             }
                                             else {
@@ -111,24 +116,34 @@ struct TrackView: View {
                                     Spacer()
                                     
                                     // barra de progresso da musica
-                                    
-                                    ZStack {
-                                        Capsule().fill(Color.white.opacity(0.2)).frame(height: 5)
-                                        
-                                        HStack(spacing: 0) {
-                                            Capsule().fill(Color.white).frame(width: 50, height: 5)
-                                            
-                                            Spacer()
-                                        }
-                                    }
-                                    .padding(.horizontal, 4)
-                                    
-                                    Spacer()
-                                    
-                                    Text("-2:20")
-                                        .font(.footnote)
-                                        .foregroundColor(.white)
-                                        .frame(width: 40, height: 40)
+                                    Slider(value: $sliderValue, in: 0...Float(music.musicKitSong?.duration ?? 30)) {
+                                        Text ("")
+                                    } minimumValueLabel: {
+                                        Text ("")
+                                    } maximumValueLabel: {
+                                        let float = Float(music.musicKitSong?.duration ?? 30)
+                                        Text (String(describing: float))
+                                    } onEditingChanged: { editing in
+                                        player.updateInfo(value: sliderValue)
+                                    } .accentColor(.white)
+//
+//                                    ZStack {
+//                                        Capsule().fill(Color.white.opacity(0.2)).frame(height: 5)
+//
+//                                        HStack(spacing: 0) {
+//                                            Capsule().fill(Color.white).frame(width: 50, height: 5)
+//
+//                                            Spacer()
+//                                        }
+//                                    }
+//                                    .padding(.horizontal, 4)
+//
+//                                    Spacer()
+//
+//                                    Text("-2:20")
+//                                        .font(.footnote)
+//                                        .foregroundColor(.white)
+//                                        .frame(width: 40, height: 40)
                                 }
                                 
                                 
@@ -170,10 +185,6 @@ struct TrackView: View {
                             }
 
                         }
-                            
-                            
-                            
-                            
                             
                             /// Artista vem aqui
                             HStack {
@@ -222,14 +233,22 @@ struct TrackView: View {
                 }
             }
         }
-        .musicSubscriptionOffer(isPresented: $isPresented)
+        .musicSubscriptionOffer(isPresented: $isPresented, options: options)
         .toolbar(.hidden, for: .tabBar)
         .background(viewModel.bgColor)
         .opacity(0.9)
-        .onAppear() {
-            viewModel.fetchContent()
+        .onAppear {
+            viewModel.fetchMusic()
+            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
+                updateSlider()
+            }
         }
         
+    }
+    
+    
+    func updateSlider () {
+        sliderValue = Float(player.getPlaybackTime())
     }
     
     func offerMusic(){
