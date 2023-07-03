@@ -125,7 +125,10 @@ struct TrackView: View {
                                             Text ("")
                                         } maximumValueLabel: {
                                             let float = Float(music.musicKitSong?.duration ?? 30)
-                                            Text (String(describing: float))
+                                            let minutes = float / 60
+                                            let integerPart = Int(minutes) % 10
+                                            let seconds = Int(((minutes - Float(integerPart)) * 6000)) % 100
+                                            Text (String(describing: "\(integerPart):\(seconds)"))
                                         } onEditingChanged: { editing in
                                             if editing == false{
                                                 offerMusic()
