@@ -65,21 +65,25 @@ struct DiscWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        VStack{
+        VStack(alignment: .leading) {
             Spacer()
             Image ("logo")
             Text (entry.title)
                 .foregroundColor(.white)
                 .bold()
             Text (entry.artist)
-                .foregroundColor(.white)
+                .foregroundColor(Color(uiColor: .systemGray2))
         }
         .padding()
         .frame(width: 169, height: 169, alignment: .leading)
         .background(
-            Image(uiImage: entry.image!)
-                .resizable()
-                .scaledToFill()
+            ZStack {
+                Image(uiImage: entry.image!)
+                    .resizable()
+                    .scaledToFill()
+                
+                LinearGradient(gradient: Gradient(colors: [.black.opacity(0.1), .black.opacity(0.4), .black.opacity(0.8)]), startPoint: .top, endPoint: .bottom)
+            }
         )
     }
 }
