@@ -8,8 +8,8 @@
 import Foundation
 
 
-struct GenreInfo: Hashable, Identifiable {
-    var id = UUID()
-    var genreName: String
-    var genreInfo: String?
+public struct GenreInfo: Hashable, Identifiable {
+    public var id = UUID()
+    public var genreName: String
+    public var genreInfo: String?
 }
