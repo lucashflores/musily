@@ -39,6 +39,17 @@
 		C1C86DB82A4EF74600BD6E81 /* TrackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C86DB72A4EF74600BD6E81 /* TrackViewModel.swift */; };
 		C1C86DBB2A4EF83A00BD6E81 /* MediaInformationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C86DBA2A4EF83A00BD6E81 /* MediaInformationCard.swift */; };
 		C1C86DBD2A4F149B00BD6E81 /* AppleMusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C86DBC2A4F149B00BD6E81 /* AppleMusicPlayer.swift */; };
+		FE0473892A53100800895B87 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0473452A5309A700895B87 /* WidgetKit.framework */; };
+		FE04738A2A53100800895B87 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0473472A5309A700895B87 /* SwiftUI.framework */; };
+		FE04738D2A53100800895B87 /* DiscWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE04738C2A53100800895B87 /* DiscWidgetBundle.swift */; };
+		FE04738F2A53100800895B87 /* DiscWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE04738E2A53100800895B87 /* DiscWidget.swift */; };
+		FE0473912A53100900895B87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE0473902A53100900895B87 /* Assets.xcassets */; };
+		FE0473952A53100900895B87 /* DiscWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = FE0473882A53100800895B87 /* DiscWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		FE04739B2A532D6A00895B87 /* AppleMusicSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C86DA02A49B68C00BD6E81 /* AppleMusicSong.swift */; };
+		FE04739E2A532DD600895B87 /* TrackViewModel2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE04739D2A532DD600895B87 /* TrackViewModel2.swift */; };
+		FE04739F2A532DD600895B87 /* TrackViewModel2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE04739D2A532DD600895B87 /* TrackViewModel2.swift */; };
+		FE0473A02A532E0300895B87 /* AppleMusicAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16C40432A50CB110038D6AD /* AppleMusicAlbum.swift */; };
+		FE0473A12A532E0900895B87 /* AppleMusicGenre.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16C40412A50C3F60038D6AD /* AppleMusicGenre.swift */; };
 		FE39C6CC2A4B0D51007B475E /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE39C6CB2A4B0D51007B475E /* InfoView.swift */; };
 		FE4E95AA2A4C66DB0009B304 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4E95A92A4C66DB0009B304 /* UIColor+.swift */; };
 		FE4E95AC2A4C76F80009B304 /* GenreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4E95AB2A4C76F80009B304 /* GenreView.swift */; };
@@ -60,7 +71,28 @@
 			remoteGlobalIDString = C17B20AB2A43195B006EDAF7;
 			remoteInfo = Musily;
 		};
+		FE0473932A53100900895B87 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C17B20A42A43195B006EDAF7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FE0473872A53100800895B87;
+			remoteInfo = DiscWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FE0473572A5309A800895B87 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				FE0473952A53100900895B87 /* DiscWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5AEBF15B2A446AE4003D9252 /* TrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackView.swift; sourceTree = "<group>"; };
@@ -99,6 +131,15 @@
 		C1C86DB72A4EF74600BD6E81 /* TrackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackViewModel.swift; sourceTree = "<group>"; };
 		C1C86DBA2A4EF83A00BD6E81 /* MediaInformationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaInformationCard.swift; sourceTree = "<group>"; };
 		C1C86DBC2A4F149B00BD6E81 /* AppleMusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicPlayer.swift; sourceTree = "<group>"; };
+		FE0473452A5309A700895B87 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		FE0473472A5309A700895B87 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		FE0473882A53100800895B87 /* DiscWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DiscWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE04738C2A53100800895B87 /* DiscWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscWidgetBundle.swift; sourceTree = "<group>"; };
+		FE04738E2A53100800895B87 /* DiscWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscWidget.swift; sourceTree = "<group>"; };
+		FE0473902A53100900895B87 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FE0473922A53100900895B87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FE04739A2A532CF900895B87 /* Musily */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Musily; sourceTree = "<group>"; };
+		FE04739D2A532DD600895B87 /* TrackViewModel2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackViewModel2.swift; sourceTree = "<group>"; };
 		FE39C6CB2A4B0D51007B475E /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		FE4E95A92A4C66DB0009B304 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		FE4E95AB2A4C76F80009B304 /* GenreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreView.swift; sourceTree = "<group>"; };
@@ -124,6 +165,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE0473852A53100800895B87 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE04738A2A53100800895B87 /* SwiftUI.framework in Frameworks */,
+				FE0473892A53100800895B87 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +205,8 @@
 				C17B20AE2A43195B006EDAF7 /* Musily */,
 				C17B20BF2A43195C006EDAF7 /* MusilyTests */,
 				C17B20C92A43195C006EDAF7 /* MusilyUITests */,
+				FE04738B2A53100800895B87 /* DiscWidget */,
+				FE0473442A5309A700895B87 /* Frameworks */,
 				C17B20AD2A43195B006EDAF7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -165,6 +217,7 @@
 				C17B20AC2A43195B006EDAF7 /* Musily.app */,
 				C17B20BC2A43195C006EDAF7 /* MusilyTests.xctest */,
 				C17B20C62A43195C006EDAF7 /* MusilyUITests.xctest */,
+				FE0473882A53100800895B87 /* DiscWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -224,6 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				5AEBF15B2A446AE4003D9252 /* TrackView.swift */,
+				FE04739D2A532DD600895B87 /* TrackViewModel2.swift */,
 				C1C86DB72A4EF74600BD6E81 /* TrackViewModel.swift */,
 			);
 			name = TrackView;
@@ -249,6 +303,27 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		FE0473442A5309A700895B87 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FE04739A2A532CF900895B87 /* Musily */,
+				FE0473452A5309A700895B87 /* WidgetKit.framework */,
+				FE0473472A5309A700895B87 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FE04738B2A53100800895B87 /* DiscWidget */ = {
+			isa = PBXGroup;
+			children = (
+				FE04738C2A53100800895B87 /* DiscWidgetBundle.swift */,
+				FE04738E2A53100800895B87 /* DiscWidget.swift */,
+				FE0473902A53100900895B87 /* Assets.xcassets */,
+				FE0473922A53100900895B87 /* Info.plist */,
+			);
+			path = DiscWidget;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -259,10 +334,12 @@
 				C17B20A82A43195B006EDAF7 /* Sources */,
 				C17B20A92A43195B006EDAF7 /* Frameworks */,
 				C17B20AA2A43195B006EDAF7 /* Resources */,
+				FE0473572A5309A800895B87 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				FE0473942A53100900895B87 /* PBXTargetDependency */,
 			);
 			name = Musily;
 			productName = Musily;
@@ -305,6 +382,23 @@
 			productReference = C17B20C62A43195C006EDAF7 /* MusilyUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		FE0473872A53100800895B87 /* DiscWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE0473962A53100900895B87 /* Build configuration list for PBXNativeTarget "DiscWidgetExtension" */;
+			buildPhases = (
+				FE0473842A53100800895B87 /* Sources */,
+				FE0473852A53100800895B87 /* Frameworks */,
+				FE0473862A53100800895B87 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DiscWidgetExtension;
+			productName = DiscWidgetExtension;
+			productReference = FE0473882A53100800895B87 /* DiscWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -326,6 +420,9 @@
 						CreatedOnToolsVersion = 14.3.1;
 						TestTargetID = C17B20AB2A43195B006EDAF7;
 					};
+					FE0473872A53100800895B87 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
 				};
 			};
 			buildConfigurationList = C17B20A72A43195B006EDAF7 /* Build configuration list for PBXProject "Musily" */;
@@ -344,6 +441,7 @@
 				C17B20AB2A43195B006EDAF7 /* Musily */,
 				C17B20BB2A43195C006EDAF7 /* MusilyTests */,
 				C17B20C52A43195C006EDAF7 /* MusilyUITests */,
+				FE0473872A53100800895B87 /* DiscWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -372,6 +470,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FE0473862A53100800895B87 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE0473912A53100900895B87 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -382,6 +488,7 @@
 				C1C86DB82A4EF74600BD6E81 /* TrackViewModel.swift in Sources */,
 				FE39C6CC2A4B0D51007B475E /* InfoView.swift in Sources */,
 				C1C86DA42A4A987300BD6E81 /* InstructionsView.swift in Sources */,
+				FE04739E2A532DD600895B87 /* TrackViewModel2.swift in Sources */,
 				C16C40422A50C3F60038D6AD /* AppleMusicGenre.swift in Sources */,
 				C17B20B22A43195B006EDAF7 /* ContentView.swift in Sources */,
 				C1A226B52A530F28005A8913 /* DeepLink.swift in Sources */,
@@ -430,6 +537,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FE0473842A53100800895B87 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE0473A02A532E0300895B87 /* AppleMusicAlbum.swift in Sources */,
+				FE04738F2A53100800895B87 /* DiscWidget.swift in Sources */,
+				FE0473A12A532E0900895B87 /* AppleMusicGenre.swift in Sources */,
+				FE04739F2A532DD600895B87 /* TrackViewModel2.swift in Sources */,
+				FE04739B2A532D6A00895B87 /* AppleMusicSong.swift in Sources */,
+				FE04738D2A53100800895B87 /* DiscWidgetBundle.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -442,6 +562,11 @@
 			isa = PBXTargetDependency;
 			target = C17B20AB2A43195B006EDAF7 /* Musily */;
 			targetProxy = C17B20C72A43195C006EDAF7 /* PBXContainerItemProxy */;
+		};
+		FE0473942A53100900895B87 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FE0473872A53100800895B87 /* DiscWidgetExtension */;
+			targetProxy = FE0473932A53100900895B87 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -563,12 +688,13 @@
 		C17B20D12A43195C006EDAF7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Musily/Preview Content\"";
-				DEVELOPMENT_TEAM = 7P886DJU8X;
+				DEVELOPMENT_TEAM = S846XZGJ2L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Musily/Info.plist;
@@ -585,7 +711,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = appleDeveloperAcademy.Musily;
+				PRODUCT_BUNDLE_IDENTIFIER = tiago.Musily;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -596,6 +722,7 @@
 		C17B20D22A43195C006EDAF7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -619,7 +746,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = appleDeveloperAcademy.Musily;
+				PRODUCT_BUNDLE_IDENTIFIER = tiago.Musily;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -704,6 +831,61 @@
 			};
 			name = Release;
 		};
+		FE0473972A53100900895B87 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S846XZGJ2L;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DiscWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DiscWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tiago.Musily.DiscWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FE0473982A53100900895B87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S846XZGJ2L;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DiscWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DiscWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tiago.Musily.DiscWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -739,6 +921,15 @@
 			buildConfigurations = (
 				C17B20D72A43195C006EDAF7 /* Debug */,
 				C17B20D82A43195C006EDAF7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FE0473962A53100900895B87 /* Build configuration list for PBXNativeTarget "DiscWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE0473972A53100900895B87 /* Debug */,
+				FE0473982A53100900895B87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
