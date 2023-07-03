@@ -32,7 +32,7 @@ class AppleMusicPlayer {
     
     func playsMusic(musica: Song) async {
         do{
-            player.queue = [musica]
+            player.queue = ApplicationMusicPlayer.Queue(for: [musica])
             try await player.prepareToPlay()
             try await player.play()
         } catch {
