@@ -3,21 +3,24 @@ import MusicKit
 import UIKit
 import SwiftUI
 
-class TrackViewModel: ObservableObject {
-    @Published var song: AppleMusicSong?
-    @Published var albums: [AppleMusicAlbum]?
-    @Published var isSongLoading = false
-    @Published var bgColor = Color(.white)
-    @Published var artistInfo: String?
-    @Published var albumInfo: String?
-    @Published var trackInfo: String?
-    @Published var allGenreInformation: [GenreInfo]?
+
+public class TrackViewModel: ObservableObject {
+    @Published public var song: AppleMusicSong?
+    @Published public var albums: [AppleMusicAlbum]?
+    @Published public var isSongLoading = false
+    @Published public var bgColor = Color(.white)
+    @Published public var artistInfo: String?
+    @Published public var albumInfo: String?
+    @Published public var trackInfo: String?
+    @Published public var allGenreInformation: [GenreInfo]?
     
     
-    init() {
+    public init() {
+        fetchContent()
     }
     
-    func fetchMusic() async {
+    
+    public func fetchMusic() async {
         let status = await MusicAuthorization.request()
         switch status {
         case .authorized:
@@ -61,7 +64,10 @@ class TrackViewModel: ObservableObject {
 
                 
             } catch {
-                
+                DispatchQueue.main.async {
+                    self.song = AppleMusicSong.getDefault()
+                    self.albums = []
+                }
                 print(error)
             }
         default:
@@ -69,7 +75,7 @@ class TrackViewModel: ObservableObject {
         }
     }
     
-    func fetchInfo(trackTitle: String, artistName: String, albumTitle: String, genreNames: [String]) {
+    public func fetchInfo(trackTitle: String, artistName: String, albumTitle: String, genreNames: [String]) {
         
         func addDotAtTheEnd(info: String) -> String {
             if (info.last != ".") {
@@ -148,7 +154,7 @@ class TrackViewModel: ObservableObject {
         }
     }
     
-    func fetchContent() {
+    public func fetchContent() {
         Task {
             await self.fetchMusic()
             guard let song = self.song else { return }
