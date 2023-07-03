@@ -18,7 +18,7 @@ struct AlbumCardView: View {
                 .font(.body)
                 .bold()
                 .opacity(0.8)
-            Text (albumCardInfo.title ?? "Indisponível")
+            Text (albumCardInfo.title ?? "Unavailable")
                 .foregroundColor(.white)
                 .font(.title2)
                 .bold()

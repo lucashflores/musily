@@ -25,6 +25,7 @@
 		C17B20C12A43195C006EDAF7 /* MusilyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B20C02A43195C006EDAF7 /* MusilyTests.swift */; };
 		C17B20CB2A43195C006EDAF7 /* MusilyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B20CA2A43195C006EDAF7 /* MusilyUITests.swift */; };
 		C17B20CD2A43195C006EDAF7 /* MusilyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B20CC2A43195C006EDAF7 /* MusilyUITestsLaunchTests.swift */; };
+		C1A226B52A530F28005A8913 /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A226B42A530F28005A8913 /* DeepLink.swift */; };
 		C1ADF4602A4F6473000138B5 /* Onboarding1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ADF45F2A4F6473000138B5 /* Onboarding1View.swift */; };
 		C1ADF4622A4F64A2000138B5 /* Onboarding2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ADF4612A4F64A2000138B5 /* Onboarding2View.swift */; };
 		C1ADF4642A4F650A000138B5 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ADF4632A4F650A000138B5 /* CardView.swift */; };
@@ -83,6 +84,7 @@
 		C17B20C62A43195C006EDAF7 /* MusilyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MusilyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C17B20CA2A43195C006EDAF7 /* MusilyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusilyUITests.swift; sourceTree = "<group>"; };
 		C17B20CC2A43195C006EDAF7 /* MusilyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusilyUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C1A226B42A530F28005A8913 /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
 		C1ADF45F2A4F6473000138B5 /* Onboarding1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding1View.swift; sourceTree = "<group>"; };
 		C1ADF4612A4F64A2000138B5 /* Onboarding2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding2View.swift; sourceTree = "<group>"; };
 		C1ADF4632A4F650A000138B5 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				C1C86DBC2A4F149B00BD6E81 /* AppleMusicPlayer.swift */,
 				FEC2D69C2A51E32700F03412 /* MusicSlider.swift */,
 				C16C404B2A5204CA0038D6AD /* NetworkSession.swift */,
+				C1A226B42A530F28005A8913 /* DeepLink.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 				C1C86DA42A4A987300BD6E81 /* InstructionsView.swift in Sources */,
 				C16C40422A50C3F60038D6AD /* AppleMusicGenre.swift in Sources */,
 				C17B20B22A43195B006EDAF7 /* ContentView.swift in Sources */,
+				C1A226B52A530F28005A8913 /* DeepLink.swift in Sources */,
 				C1C86DB02A4DAF8000BD6E81 /* NetworkManager.swift in Sources */,
 				FE4E95AC2A4C76F80009B304 /* GenreView.swift in Sources */,
 				C16C404C2A5204CA0038D6AD /* NetworkSession.swift in Sources */,
@@ -568,7 +572,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Musily/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_CFBundleDisplayName = Disc;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Please allow access to Apple Music.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -601,7 +606,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Musily/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_CFBundleDisplayName = Disc;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Please allow access to Apple Music.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

@@ -4,6 +4,7 @@ import MusicKit
 struct TrackView: View {
     var cards: [MediaInformationCard]?
     var player = AppleMusicPlayer()
+    var deepLinker = DeepLink()
     @State var options = MusicSubscriptionOffer.Options(
         messageIdentifier: .playMusic
     )
@@ -65,7 +66,7 @@ struct TrackView: View {
                                 VStack(spacing: 0) {
                                     
                                     HStack {
-                                        Text(music.title ?? "Indisponível")
+                                        Text(music.title ?? "Unavailable")
                                             .font(.title3)
                                             .fontWeight(.bold)
                                             .foregroundColor(.white)
@@ -75,7 +76,7 @@ struct TrackView: View {
                                     }
                                     
                                     HStack {
-                                        Text(music.artistName ?? "Indisponível")
+                                        Text(music.artistName ?? "Unavailable")
                                             .font(.headline)
                                             .fontWeight(.light)
                                             .foregroundColor(.white)
@@ -162,7 +163,7 @@ struct TrackView: View {
                                 
                                 /// Artista vem aqui
                                 HStack {
-                                    Text("Sobre")
+                                    Text("About the artist")
                                         .font(.footnote)
                                         .fontWeight(.black)
                                         .foregroundColor(.white)
@@ -170,7 +171,7 @@ struct TrackView: View {
                                 }
                                 if (viewModel.artistInfo != nil)
                                 {
-                                    Text(viewModel.artistInfo ?? "Indisponível")
+                                    Text(viewModel.artistInfo ?? "Unavailable")
                                         .font(.footnote)
                                         .foregroundColor(.white)
                                 }
@@ -181,11 +182,11 @@ struct TrackView: View {
                                     HStack{
                                         if let trackInfo = viewModel.trackInfo, let albumInfo = viewModel.albumInfo, let allGenreInformation = viewModel.allGenreInformation, let albums = viewModel.albums {
                                             
-                                            if (trackInfo != "Indisponível")
+                                            if (trackInfo != "Unavailable")
                                             {
                                                 CardView(cardInfo: MediaInformationCard(title: "The Track", content: trackInfo))
                                             }
-                                            if (albumInfo != "Indisponível")
+                                            if (albumInfo != "Unavailable")
                                             {
                                                 CardView(cardInfo: MediaInformationCard(title: "The Album", content: albumInfo))
                                             }
@@ -198,7 +199,15 @@ struct TrackView: View {
 
                                             ForEach(albums)
                                             { album in
-                                                AlbumCardView(albumCardInfo: album)
+                                                Button {
+                                                    if let url = album.albumURL {
+                                                        deepLinker.redirect(url: url)
+                                                    }
+                                                } label: {
+                                                    AlbumCardView(albumCardInfo: album)
+                                                }
+
+                                                
 
                                             }
                                         }
@@ -248,7 +257,7 @@ struct TrackView: View {
     
     func populateString (song: AppleMusicSong) -> [String]{
         var aux = song.genreNames
-        aux.append(song.albumTitle ?? "Indisponível")
+        aux.append(song.albumTitle ?? "Unavailable")
         let data = DateFormatter()
         data.dateFormat = "YYYY"
         aux.append(data.string(from: song.releaseDate!) )

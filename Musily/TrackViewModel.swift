@@ -38,7 +38,7 @@ class TrackViewModel: ObservableObject {
                 let fetchedSong = songWithArtists.map({ song in
                     return AppleMusicSong(title: song.title, releaseDate: song.releaseDate, albumTitle: song.albumTitle , genreNames: song.genreNames.filter({ genre in
                         return genre != "Music"
-                    }), artistName: song.artistName, composerName: song.composerName ?? "Indisponível", artistArtworkURL: (song.artwork?.url(width: 330, height: 330))!, albumArtworkURL: (song.artwork?.url(width: 300, height: 300))!, songURL: song.url!, musicKitSong: song)
+                    }), artistName: song.artistName, composerName: song.composerName ?? "Unavailable", artistArtworkURL: (song.artwork?.url(width: 330, height: 330))!, albumArtworkURL: (song.artwork?.url(width: 300, height: 300))!, songURL: song.url!, musicKitSong: song)
                 })
                 guard let fetchedSong else { return }
                 let data = try? Data(contentsOf: fetchedSong.albumArtworkURL)
@@ -54,7 +54,7 @@ class TrackViewModel: ObservableObject {
                     self.albums = albums.filter({ album in
                         return album.title != self.song?.albumTitle && album.isSingle == false
                     }).map({ album in
-                        return AppleMusicAlbum(title: album.title, artworkURL: album.artwork?.url(width: 240, height: 240))
+                        return AppleMusicAlbum(title: album.title, artworkURL: album.artwork?.url(width: 240, height: 240), albumURL: album.url)
                     })
                 }
 
@@ -105,7 +105,7 @@ class TrackViewModel: ObservableObject {
                 print("track")
                 print(error)
                 DispatchQueue.main.async {
-                    self.trackInfo = "Indisponível"
+                    self.trackInfo = "Unavailable"
                 }
             }
         }
@@ -121,7 +121,7 @@ class TrackViewModel: ObservableObject {
                 print("album")
                 print(error)
                 DispatchQueue.main.async {
-                    self.albumInfo = "Indisponível"
+                    self.albumInfo = "Unavailable"
                 }
             }
         }
