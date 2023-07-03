@@ -13,6 +13,7 @@ struct TrackView: View {
     @State var play = false
     @Binding var isPresented : Bool
     @State var duration : Float = 0.0
+    @State var timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
     
     var body: some View {
         
@@ -125,7 +126,13 @@ struct TrackView: View {
                                             let float = Float(music.musicKitSong?.duration ?? 30)
                                             Text (String(describing: float))
                                         } onEditingChanged: { editing in
-                                            player.updateInfo(value: sliderValue)
+                                            if editing == false{
+                                                offerMusic()
+                                                timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
+                                                player.updateInfo(value: sliderValue)
+                                            } else{
+                                                self.timer.upstream.connect().cancel()
+                                            }
                                         } .accentColor(.white)
     //
     //                                    ZStack {
@@ -250,11 +257,11 @@ struct TrackView: View {
         .toolbar(.hidden, for: .tabBar)
         .background(viewModel.bgColor)
         .opacity(0.9)
+        .onReceive(timer, perform: { input in
+                    updateSlider()
+                })
         .onAppear {
             viewModel.fetchContent()
-            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
-                updateSlider()
-            }
         }
         
     }
