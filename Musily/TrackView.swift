@@ -134,24 +134,6 @@ struct TrackView: View {
                                                 self.timer.upstream.connect().cancel()
                                             }
                                         } .accentColor(.white)
-    //
-    //                                    ZStack {
-    //                                        Capsule().fill(Color.white.opacity(0.2)).frame(height: 5)
-    //
-    //                                        HStack(spacing: 0) {
-    //                                            Capsule().fill(Color.white).frame(width: 50, height: 5)
-    //
-    //                                            Spacer()
-    //                                        }
-    //                                    }
-    //                                    .padding(.horizontal, 4)
-    //
-    //                                    Spacer()
-    //
-    //                                    Text("-2:20")
-    //                                        .font(.footnote)
-    //                                        .foregroundColor(.white)
-    //                                        .frame(width: 40, height: 40)
                                     }
                                     
                                     
@@ -166,25 +148,7 @@ struct TrackView: View {
                                             }
                                         }
                                         .padding(.top, 8)
-                                        
-                                        VStack(spacing: 0) {
-                                            Spacer()
-                                            
-                                            Button {
-                                                guard let musicKitSong = music.musicKitSong else { return }
-                                                player.addsToPlaylist(musica: musicKitSong)
-                                                
-                                            } label: {
- 
-                                                Image(systemName: "plus.app")
-                                                    .resizable()
-                                                    .frame(width: 18, height: 18)
-                                                    .foregroundColor(.white)
-                                               
-
-                                            }
-                                        }
-                                        .frame(width: 20, height: 17)
+                            
                                         ShareLink(item: music.songURL) {
                                             Image(systemName: "square.and.arrow.up")
                                                 .resizable()
@@ -298,6 +262,7 @@ struct TrackView: View {
             try await library.add(musica, to: playlist)
         }
     }
+    
 }
 
 struct TrackView_Previews: PreviewProvider {

@@ -18,7 +18,6 @@
 		C16C40542A52144D0038D6AD /* LastFMAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16C40532A52144D0038D6AD /* LastFMAlbum.swift */; };
 		C16C40562A5217600038D6AD /* LastFMWiki.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16C40552A5217600038D6AD /* LastFMWiki.swift */; };
 		C16C40582A521B3A0038D6AD /* LastFMTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16C40572A521B3A0038D6AD /* LastFMTrack.swift */; };
-		C16C405A2A522D4D0038D6AD /* AppleMusicPlaylistManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16C40592A522D4D0038D6AD /* AppleMusicPlaylistManager.swift */; };
 		C17B20B02A43195B006EDAF7 /* MusilyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B20AF2A43195B006EDAF7 /* MusilyApp.swift */; };
 		C17B20B22A43195B006EDAF7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17B20B12A43195B006EDAF7 /* ContentView.swift */; };
 		C17B20B42A43195C006EDAF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C17B20B32A43195C006EDAF7 /* Assets.xcassets */; };
@@ -74,7 +73,6 @@
 		C16C40532A52144D0038D6AD /* LastFMAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastFMAlbum.swift; sourceTree = "<group>"; };
 		C16C40552A5217600038D6AD /* LastFMWiki.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastFMWiki.swift; sourceTree = "<group>"; };
 		C16C40572A521B3A0038D6AD /* LastFMTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastFMTrack.swift; sourceTree = "<group>"; };
-		C16C40592A522D4D0038D6AD /* AppleMusicPlaylistManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicPlaylistManager.swift; sourceTree = "<group>"; };
 		C17B20AC2A43195B006EDAF7 /* Musily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Musily.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C17B20AF2A43195B006EDAF7 /* MusilyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusilyApp.swift; sourceTree = "<group>"; };
 		C17B20B12A43195B006EDAF7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -215,7 +213,6 @@
 				C1C86DBC2A4F149B00BD6E81 /* AppleMusicPlayer.swift */,
 				FEC2D69C2A51E32700F03412 /* MusicSlider.swift */,
 				C16C404B2A5204CA0038D6AD /* NetworkSession.swift */,
-				C16C40592A522D4D0038D6AD /* AppleMusicPlaylistManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -396,7 +393,6 @@
 				C1C86DA12A49B68C00BD6E81 /* AppleMusicSong.swift in Sources */,
 				C1ADF4662A4F6590000138B5 /* IntroView.swift in Sources */,
 				C1C86DA62A4A9A0D00BD6E81 /* SubscribeToAppleMusicView.swift in Sources */,
-				C16C405A2A522D4D0038D6AD /* AppleMusicPlaylistManager.swift in Sources */,
 				FEC2D69D2A51E32700F03412 /* MusicSlider.swift in Sources */,
 				C16C40522A520F040038D6AD /* NetworkResponse.swift in Sources */,
 				C1ADF4682A4F65B1000138B5 /* OnboardingTabView.swift in Sources */,
