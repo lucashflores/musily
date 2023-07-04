@@ -34,7 +34,7 @@ public class TrackViewModel2 {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "dd"
                 let day: Int = Int(dateFormatter.string(from: today)) ?? 1
-                let songId = plWithTracks?.tracks?[day + 3].id
+                let songId = plWithTracks?.tracks?[day - 1].id
                 let songRequest = MusicCatalogResourceRequest<Song>(matching: \.id, equalTo: songId ?? MusicItemID(rawValue: ""))
                 let songResponse = try await songRequest.response()
                 let songWithArtists = try await songResponse.items.first?.with([.artists])
