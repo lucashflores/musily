@@ -18,227 +18,285 @@ struct TrackView: View {
     
     var body: some View {
         
-        ZStack {
-            if (viewModel.song == nil) {
-                ProgressView()
-                    .progressViewStyle(.circular)
+        VStack {
+            if (viewModel.song == nil){
+                SplashScreen()
             }
-            else {
-                if let music = viewModel.song {
-                    VStack(spacing: 0) {
-                        Rectangle()
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .foregroundColor(Color(uiColor: .clear))
-                            .overlay {
-                                LinearGradient(
-                                    colors: [.white, Color(uiColor: .clear), .black],
-                                    startPoint: .top,
-                                    endPoint: .bottom
-                                )
-                                .ignoresSafeArea()
-                            }
-                            .opacity(0.3)
-                    }
-                
-                    ScrollView {
-                        VStack {
-                            VStack(spacing: 24) {
-                                
-                                Spacer()
-                                
-                                HStack(spacing: 0) {
-                                    Group {
-                                        Text("Discovery")
-                                            .font(.title3)
-                                            .fontWeight(.black)
-                                        Text(" of the day")
-                                            .font(.title3)
-                                    }
-                                    .foregroundColor(.white)
-                                }
-                    
-                            AsyncImage(url: music.artistArtworkURL)
-                                .frame(width: 330, height: 330, alignment: .center)
-                                .cornerRadius(16)
-                            
-                            VStack(spacing: 16) {
-                                
+            else{
+                ScrollView {
+                    ZStack {
+                        if let music = viewModel.song {
+                            ZStack {
                                 VStack(spacing: 0) {
                                     
-                                    HStack {
-                                        Text(music.title ?? "Unavailable")
-                                            .font(.title3)
-                                            .fontWeight(.bold)
-                                            .foregroundColor(.white)
-                                        
-                                        Spacer()
-                                        
-                                    }
-                                    
-                                    HStack {
-                                        Text(music.artistName ?? "Unavailable")
-                                            .font(.headline)
-                                            .fontWeight(.light)
-                                            .foregroundColor(.white)
-                                        
-                                        Spacer()
-                                    }
-                                }
-                                
-                                
-                                VStack(spacing: 0) {
-                                    
-                                    HStack {
-
-                                        Button {
-                                            play.toggle()
-                                            
-                                            switch play {
-                                            case false:
-                                                imagem = "play.circle.fill"
-                                                player.pause()
-                                            case true:
-                                                if (player.isPlayerQueueEmpty()) {
-                                                    offerMusic()
-                                                    guard let musicKitSong = music.musicKitSong else { return }
-                                                    player.playsSong(musica: musicKitSong)
-                                                }
-                                                else {
-                                                    player.resumeSong()
-                                                }
-                                                imagem = "pause.circle.fill"
-                                            }
-                                            
-                                        } label: {
-                                            Image(systemName: imagem)
-                                                .resizable()
-                                                .frame(width: 40, height: 40)
-                                                .foregroundColor(.white)
+                                    Rectangle()
+                                        .frame(maxWidth: .infinity, maxHeight: 180)
+                                        .foregroundColor(Color(uiColor: .clear))
+                                        .overlay {
+                                            LinearGradient(
+                                                colors: [Color("purple"), Color("purple") .opacity(0.5), Color(uiColor: .clear)],
+                                                startPoint: .top,
+                                                endPoint: .bottom
+                                            )
+                                            .ignoresSafeArea()
                                         }
-                                        
-                                        Spacer()
-                                        
-                                        // barra de progresso da musica
-                                        Slider(value: $sliderValue, in: 0...Float(music.musicKitSong?.duration ?? 30)) {
-                                            Text ("")
-                                        } minimumValueLabel: {
-                                            Text ("")
-                                        } maximumValueLabel: {
-                                            let float = Float(music.musicKitSong?.duration ?? 30)
-                                            let minutes = float / 60
-                                            let integerPart = Int(minutes) % 10
-                                            let seconds = Int(((minutes - Float(integerPart)) * 6000)) % 100
-                                            Text (String(describing: "\(integerPart):\(seconds)"))
-                                        } onEditingChanged: { editing in
-                                            if editing == false{
-                                                offerMusic()
-                                                timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
-                                                player.updateInfo(value: sliderValue)
-                                            } else{
-                                                self.timer.upstream.connect().cancel()
-                                            }
-                                        } .accentColor(.white)
-                                    }
                                     
-                                    
-                                    HStack(spacing: 16) {
-                                        let infos = populateString(song: music)
-                                        ScrollView(.horizontal, showsIndicators: false){
-                                            HStack{
-                                                ForEach(infos, id: \.self){ info in
-                                                    GenreView (text: info)
-
-                                                }
-                                            }
-                                        }
-                                        .padding(.top, 8)
-                            
-                                        ShareLink(item: music.songURL) {
-                                            Image(systemName: "square.and.arrow.up")
-                                                .resizable()
-                                                .frame(width: 18, height: 24)
-                                                .foregroundColor(.white)
-                                           }
-                                    }
-                                }
-
-                            }
-                                
-                                /// Artista vem aqui
-                                HStack {
-                                    Text("About the artist")
-                                        .font(.footnote)
-                                        .fontWeight(.black)
-                                        .foregroundColor(.white)
                                     Spacer()
                                 }
-                                if (viewModel.artistInfo != nil)
-                                {
-                                    Text(viewModel.artistInfo ?? "Unavailable")
-                                        .font(.footnote)
-                                        .foregroundColor(.white)
-                                }
-                                else {
-                                    ProgressView()
-                                }
-                                ScrollView(.horizontal, showsIndicators: false){
-                                    HStack{
-                                        if let trackInfo = viewModel.trackInfo, let albumInfo = viewModel.albumInfo, let allGenreInformation = viewModel.allGenreInformation, let albums = viewModel.albums {
-                                            
-                                            if (trackInfo != "Unavailable")
-                                            {
-                                                CardView(cardInfo: MediaInformationCard(title: "The Track", content: trackInfo))
-                                            }
-                                            if (albumInfo != "Unavailable")
-                                            {
-                                                CardView(cardInfo: MediaInformationCard(title: "The Album", content: albumInfo))
-                                            }
-                                            
-                                            ForEach(allGenreInformation)
-                                            { genre in
-                                                CardView(cardInfo: MediaInformationCard(title: "The Genre - \(genre.genreName)", content: genre.genreInfo ?? "loading"))
-
-                                            }
-
-                                            ForEach(albums)
-                                            { album in
-                                                Button {
-                                                    if let url = album.albumURL {
-                                                        deepLinker.redirect(url: url)
-                                                    }
-                                                } label: {
-                                                    AlbumCardView(albumCardInfo: album)
-                                                }
-
-                                                
-
-                                            }
-                                        }
-                                        else {
-                                            ProgressView()
-                                        }
-                                    }
-                                }
                                 
+                                VStack {
+                                    VStack(spacing: 32) {
+                                        
+                                        
+                                        HStack(spacing: 0) {
+                                            Image("DiscoveryOfTheDay")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(maxWidth: 230)
+                                        }
+                                        .padding(.top, 70)
+                                        .padding(.bottom, 20)
+                                        
+                                        AsyncImage(url: music.artistArtworkURL)
+                                            .frame(width: 350, height: 350, alignment: .center)
+                                            .cornerRadius(24)
+                                        
+                                        VStack(spacing: 8) {
+                                            
+                                            VStack(spacing: 6) {
+                                                
+                                                HStack {
+                                                    Text(music.title ?? "Indisponível")
+                                                        .font(.title)
+                                                        .fontWeight(.bold)
+                                                        .foregroundColor(.white)
+                                                    
+                                                    Spacer()
+                                                    
+                                                }
+                                                
+                                                HStack {
+                                                    Text(music.artistName ?? "Indisponível")
+                                                        .font(.headline)
+                                                        .foregroundColor(.white)
+                                                        .fontWeight(.regular)
+                                                        .opacity(0.6)
+                                                    
+                                                    Spacer()
+                                                }
+                                            }
+                                            
+                                            
+                                            
+                                            VStack(spacing: 10) {
+                                                
+                                                HStack {
+                                                    
+                                                    Button {
+                                                        play.toggle()
+                                                        
+                                                        switch play {
+                                                        case false:
+                                                            imagem = "play.circle.fill"
+                                                            player.pause()
+                                                        case true:
+                                                            if (player.isPlayerQueueEmpty()) {
+                                                                offerMusic()
+                                                                guard let musicKitSong = music.musicKitSong else { return }
+                                                                player.playsSong(musica: musicKitSong)
+                                                            }
+                                                            else {
+                                                                player.resumeSong()
+                                                            }
+                                                            imagem = "pause.circle.fill"
+                                                        }
+                                                        
+                                                    } label: {
+                                                        Image(systemName: imagem)
+                                                            .resizable()
+                                                            .frame(width: 40, height: 40)
+                                                            .foregroundColor(.white)
+                                                    }
+                                                    
+                                                    Spacer()
+                                                    
+                                                    // barra de progresso da musica
+                                                    Slider(value: $sliderValue, in: 0...Float(music.musicKitSong?.duration ?? 30)) {
+                                                        Text ("")
+                                                    } minimumValueLabel: {
+                                                        Text ("")
+                                                    } maximumValueLabel: {
+                                                        let tempo = Float(music.musicKitSong?.duration ?? 30)
+                                                        let min = Int(tempo / 60)
+                                                        let sec = Int(tempo - (Float(min * 60)))
+                                                        Text (sec < 10 ? "-\(min):0\(sec)" : "-\(min):\(sec)")
+                                                            .font(.footnote)
+                                                            .foregroundColor(.white)
+                                                            .bold()
+                                                        
+                                                    } onEditingChanged: { editing in
+                                                        if editing == false{
+                                                            offerMusic()
+                                                            timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
+                                                            player.updateInfo(value: sliderValue)
+                                                        } else{
+                                                            self.timer.upstream.connect().cancel()
+                                                        }
+                                                    } .accentColor(.white)
+                                                }
+                                                
+                                                
+                                                HStack(spacing: 16) {
+                                                    let infos = populateString(song: music)
+                                                    ScrollView(.horizontal, showsIndicators: false){
+                                                        HStack(spacing: -10){
+                                                            ForEach(infos, id: \.self){ info in
+                                                                GenreView (text: info)
+                                                                
+                                                            }
+                                                        }
+                                                    }
+                                                    .padding(.top, 8)
+                                                    
+                                                    ShareLink(item: music.songURL) {
+                                                        Image(systemName: "square.and.arrow.up")
+                                                            .resizable()
+                                                            .frame(width: 18, height: 24)
+                                                            .foregroundColor(.white)
+                                                            .bold()
+                                                    }
+                                                }
+                                            }
+                                            
+                                        }
+                                        
+                                        /// Artista vem aqui
+                                        VStack (alignment: .leading){
+                                            HStack(spacing: 4){
+                                                Text("ABOUT")
+                                                    .font(.title3)
+                                                    .foregroundColor(Color("green"))
+                                                    .bold()
+                                                
+                                                Text("the artist")
+                                                    .foregroundColor(Color("green"))
+                                                    .font(.title3)
+                                                
+                                                Spacer()
+                                            }
+                                            .frame(maxHeight: 10)
+                                            .padding(.vertical)
+                                            
+                                            Text(viewModel.artistInfo ?? "Unavailable")
+                                                .foregroundColor(.white)
+                                                .multilineTextAlignment(.leading)
+                                                .font(.footnote)
+                                                .bold()
+                                            
+                                        }
+                                        
+                                        
+                                        
+                                        HStack {
+                                            Image("DiscoverMore")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(maxWidth: 200)
+                                            
+                                            Spacer()
+                                            
+                                        }
+                                        .padding(.vertical, -16)
+                                        .padding(.top, 48)
+                                        
+                                        ScrollView(.horizontal, showsIndicators: false){
+                                            HStack (spacing: 16){
+                                                if let trackInfo = viewModel.trackInfo, let albumInfo = viewModel.albumInfo, let allGenreInformation = viewModel.allGenreInformation, let albums = viewModel.albums {
+                                                    
+                                                    if (trackInfo != "Unavailable")
+                                                    {
+                                                        CardView(cardInfo: MediaInformationCard(title: "The Track", content: trackInfo))
+                                                    }
+                                                    if (albumInfo != "Unavailable")
+                                                    {
+                                                        CardView(cardInfo: MediaInformationCard(title: "The Album", content: albumInfo))
+                                                    }
+                                                    
+                                                    ForEach(allGenreInformation)
+                                                    { genre in
+                                                        CardView(cardInfo: MediaInformationCard(title: "The Genre - \(genre.genreName)", content: genre.genreInfo ?? "loading"))
+                                                        
+                                                    }
+                                                    
+                                                    ForEach(albums)
+                                                    { album in
+                                                        Button {
+                                                            if let url = album.albumURL {
+                                                                deepLinker.redirect(url: url)
+                                                            }
+                                                        } label: {
+                                                            AlbumCardView(albumCardInfo: album)
+                                                        }
+                                                        
+                                                        
+                                                        
+                                                    }
+                                                }
+                                                else {
+                                                    ProgressView()
+                                                }
+                                            }
+                                            
+                                            
+                                            
+                                        }
+                                        
+                                    }
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .padding(32)
+                                }
                             }
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .padding()
                         }
-                        .padding()
-                }
+                    }
+                    .background(.black)
                 }
             }
         }
         .musicSubscriptionOffer(isPresented: $isPresented, options: options)
         .toolbar(.hidden, for: .tabBar)
-        .background(viewModel.bgColor)
         .opacity(0.9)
         .onReceive(timer, perform: { input in
-                    updateSlider()
-                })
+            updateSlider()
+        })
         .onAppear {
             viewModel.fetchContent()
         }
+        .background {
+            if let _ = viewModel.song {
+                VStack(spacing: 0){
+                    Rectangle()
+                        .fill(Color("purple"))
+                    
+                    Rectangle()
+                        .frame(maxWidth: .infinity, maxHeight: 180)
+                        .foregroundColor(Color(uiColor: .clear))
+                        .overlay {
+                            LinearGradient(
+                                colors: [Color("purple"), .black],
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                            .ignoresSafeArea()
+                        }
+                    
+                    Rectangle()
+                        .fill(.black)
+                }
+            } else {
+                Color(.white)
+            }
+        }
+        .ignoresSafeArea()
         
     }
     
@@ -259,11 +317,12 @@ struct TrackView: View {
     
     
     func populateString (song: AppleMusicSong) -> [String]{
-        var aux = song.genreNames
-        aux.append(song.albumTitle ?? "Unavailable")
+        var aux = [String]()
+        aux.append("Genre: " + song.genreNames.first!)
+        aux.append("Album: " + (song.albumTitle ?? "Unavailable"))
         let data = DateFormatter()
         data.dateFormat = "YYYY"
-        aux.append(data.string(from: song.releaseDate!) )
+        aux.append("Year: " + data.string(from: song.releaseDate!))
         return aux
     }
     
