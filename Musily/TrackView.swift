@@ -224,7 +224,10 @@ struct TrackView: View {
                                                     
                                                     ForEach(allGenreInformation)
                                                     { genre in
-                                                        CardView(cardInfo: MediaInformationCard(title: "The Genre - \(genre.genreName)", content: genre.genreInfo ?? "loading"))
+                                                        if (genre.genreInfo != "Unavailable")
+                                                        {
+                                                            CardView(cardInfo: MediaInformationCard(title: "The Genre - \(genre.genreName)", content: genre.genreInfo ?? "loading"))
+                                                        }
                                                         
                                                     }
                                                     

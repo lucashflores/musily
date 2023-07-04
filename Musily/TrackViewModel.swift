@@ -77,7 +77,7 @@ public class TrackViewModel: ObservableObject {
     public func fetchInfo(trackTitle: String, artistName: String, albumTitle: String, genreNames: [String]) {
         
         func addDotAtTheEnd(info: String) -> String {
-            if (info.last != ".") {
+            if (info.last != "." && info.count > 0) {
                 return info + "."
             }
             return info
@@ -88,9 +88,18 @@ public class TrackViewModel: ObservableObject {
             result in
             switch result {
             case (.success(let artistResponse)):
+                let artistInfoResponse = artistResponse.artist.bio.summary
+        
                 DispatchQueue.main.async {
-                    self.artistInfo = addDotAtTheEnd(info: artistResponse.artist.bio.summary.replacingOccurrences(of: " <a(.*)", with: "", options: .regularExpression))
-                    
+                    if (artistInfoResponse.replacingOccurrences(of: " ", with: " ").count == 0)
+                    {
+                        self.artistInfo = "Unavailable"
+                    }
+                    else{
+                        self.artistInfo = addDotAtTheEnd(info: artistInfoResponse.replacingOccurrences(of: " <a(.*)", with: "", options: .regularExpression))
+                    }
+
+        
                 }
             case(.failure(let error)):
                 print("artist")
@@ -103,7 +112,14 @@ public class TrackViewModel: ObservableObject {
             switch result {
             case (.success(let trackResponse)):
                 DispatchQueue.main.async {
-                    self.trackInfo = addDotAtTheEnd(info: trackResponse.track.wiki.summary.replacingOccurrences(of: " <a(.*)", with: "", options: .regularExpression))
+                    let trackInfoResponse = trackResponse.track.wiki.summary
+                    if (trackInfoResponse.replacingOccurrences(of: " ", with: " ").count == 0)
+                    {
+                        self.trackInfo = "Unavailable"
+                    }
+                    else {
+                        self.trackInfo = addDotAtTheEnd(info: trackInfoResponse.replacingOccurrences(of: " <a(.*)", with: "", options: .regularExpression))
+                    }
                     
                 }
             case(.failure(let error)):
@@ -120,7 +136,14 @@ public class TrackViewModel: ObservableObject {
             switch result {
             case (.success(let albumResponse)):
                 DispatchQueue.main.async {
-                    self.albumInfo = addDotAtTheEnd(info: albumResponse.album.wiki.summary.replacingOccurrences(of: " <a(.*)", with: "", options: .regularExpression))
+                    let albumInfoResponse = albumResponse.album.wiki.summary
+                    if (albumInfoResponse.replacingOccurrences(of: " ", with: " ").count == 0)
+                    {
+                        self.albumInfo = "Unavailable"
+                    }
+                    else {
+                        self.albumInfo = addDotAtTheEnd(info: albumInfoResponse.replacingOccurrences(of: " <a(.*)", with: "", options: .regularExpression))
+                    }
                 }
             case(.failure(let error)):
                 print("album")
@@ -143,8 +166,13 @@ public class TrackViewModel: ObservableObject {
                         }
                     }
                     DispatchQueue.main.async {
-                        self.allGenreInformation?.append(GenreInfo(genreName: genreName, genreInfo: addDotAtTheEnd(info: genreResponse.tag.wiki.summary.replacingOccurrences(of: " <a(.*)", with: "", options: .regularExpression))))
-                        
+                        let genreInfoResponse = genreResponse.tag.wiki.summary
+                        if (genreInfoResponse.replacingOccurrences(of: " ", with: " ").count > 0) {
+                            self.allGenreInformation?.append(GenreInfo(genreName: genreName, genreInfo: addDotAtTheEnd(info: genreInfoResponse.replacingOccurrences(of: " <a(.*)", with: "", options: .regularExpression))))
+                        }
+                        else {
+                            self.allGenreInformation?.append(GenreInfo(genreName: genreName, genreInfo: "Unavailable"))
+                        }
                     }
                 case(.failure(let error)):
                     

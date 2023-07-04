@@ -94,7 +94,7 @@ struct DiscWidgetEntryView : View {
                     .resizable()
                     .scaledToFill()
                 
-                LinearGradient(gradient: Gradient(colors: [.black.opacity(0.1), .black.opacity(0.4), .black.opacity(0.8)]), startPoint: .top, endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: [.black.opacity(0.1), .black.opacity(0.5), .black.opacity(0.9)]), startPoint: .top, endPoint: .bottom)
             }
         )
     }

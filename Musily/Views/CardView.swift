@@ -57,7 +57,18 @@ struct CardView: View {
                 .padding(32)
                 .presentationCornerRadius(32)
                 .background(
-                    LinearGradient(gradient: Gradient(colors: [Color("purple").opacity(0.5), Color(.black)]), startPoint: .top, endPoint: .bottom))
+                    Rectangle()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .foregroundColor(.black)
+                        .overlay {
+                            LinearGradient(
+                                colors: [Color("purple").opacity(0.5), .black],
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                            .ignoresSafeArea()
+                        }
+                )
         }
         
         
