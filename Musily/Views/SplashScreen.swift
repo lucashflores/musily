@@ -1,23 +1,21 @@
-//
-//  SplashScreen.swift
-//  Musily
-//
-//  Created by Tiago Mendes Bottamedi on 04/07/23.
-//
-
 import SwiftUI
 
 struct SplashScreen: View {
     var body: some View {
-        VStack{
-            Image("DISC")
+        ZStack {
+            Image("loading")
                 .resizable()
-                .frame(width: 200, height: 200)
-            Text("Estamos buscando suas músicas, aguarde")
+                .scaledToFill()
+                .ignoresSafeArea()
+            
+            Rectangle()
+                .ignoresSafeArea()
+                .opacity(0.35)
+            
+            Text("We are arranging the Disc for you.")
+                .font(.system(size: 20))
                 .foregroundColor(.white)
         }
-        .frame(width: 250, height: 250)
-        .background(.black)
     }
 }
 

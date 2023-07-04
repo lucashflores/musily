@@ -215,18 +215,16 @@ struct TrackView: View {
                                                     
                                                     if (trackInfo != "Unavailable")
                                                     {
-                                                        CardView(cardInfo: MediaInformationCard(title: "The Track", content: trackInfo), color1: "green", color2: "purple", icon: "music.mic.circle.fill")
+                                                        CardView(cardInfo: MediaInformationCard(title: "The Track", content: trackInfo))
                                                     }
                                                     if (albumInfo != "Unavailable")
                                                     {
-                                                        CardView(cardInfo: MediaInformationCard(title: "The Album", content: albumInfo), color1: "green", color2: "purple", icon: "opticaldisc.fill")
+                                                        CardView(cardInfo: MediaInformationCard(title: "The Album", content: albumInfo))
                                                     }
                                                     
                                                     ForEach(allGenreInformation)
                                                     { genre in
-                                                        CardView(cardInfo: MediaInformationCard(title: "The Genre - \(genre.genreName)", content: genre.genreInfo ?? "loading"), color1: "green",
-                                                                 color2: "purple", icon:
-                                                                    "music.note")
+                                                        CardView(cardInfo: MediaInformationCard(title: "The Genre - \(genre.genreName)", content: genre.genreInfo ?? "loading"))
                                                         
                                                     }
                                                     
