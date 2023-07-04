@@ -179,22 +179,21 @@ struct TrackView: View {
                                         
                                         /// Artista vem aqui
                                         VStack (alignment: .leading){
-                                            HStack{
-                                                Text ("ABOUT The Artist")
-                                                    .padding(.horizontal)
-                                                    .padding(.vertical, 8)
-                                                    .font(.headline)
-                                                    .fontWeight(.bold)
+                                            HStack(spacing: 4){
+                                                Text("ABOUT")
+                                                    .font(.title3)
                                                     .foregroundColor(Color("green"))
-                                                    .background(.white)
-                                                    .cornerRadius(16)
+                                                    .bold()
+                                                
+                                                Text("the artist")
+                                                    .foregroundColor(Color("green"))
+                                                    .font(.title3)
+                                                
                                                 Spacer()
-                                                Image(systemName: "music.mic.circle.fill")
-                                                    .font(.title)
-                                                    .fontWeight(.black)
-                                                    .foregroundColor(.white)
                                             }
-                                            .padding(.bottom)
+                                            .frame(maxHeight: 10)
+                                            .padding(.vertical)
+                                            
                                             Text(viewModel.artistInfo ?? "Unavailable")
                                                 .foregroundColor(.white)
                                                 .multilineTextAlignment(.leading)
@@ -202,20 +201,8 @@ struct TrackView: View {
                                                 .bold()
                                             
                                         }
-                                        .padding(.bottom, 40)
-                                        .padding(.top, 30)
-                                        .padding(.horizontal, 32)
-                                        .frame(maxWidth: 350, maxHeight: .infinity, alignment: .leading)
-                                        .background(
-                                            Color("green")
-                                                .overlay {
-                                                    LinearGradient(
-                                                        colors: [Color(uiColor: .clear), Color("purple") .opacity(0.7)],
-                                                        startPoint: .top,
-                                                        endPoint: .bottom)
-                                                }
-                                        )
-                                        .cornerRadius(24)
+                                        
+                                        
                                         
                                         HStack {
                                             Image("DiscoverMore")
@@ -226,9 +213,11 @@ struct TrackView: View {
                                             Spacer()
                                             
                                         }
+                                        .padding(.vertical, -16)
+                                        .padding(.top, 48)
                                         
                                         ScrollView(.horizontal, showsIndicators: false){
-                                            HStack{
+                                            HStack (spacing: 16){
                                                 if let trackInfo = viewModel.trackInfo, let albumInfo = viewModel.albumInfo, let allGenreInformation = viewModel.allGenreInformation, let albums = viewModel.albums {
                                                     
                                                     if (trackInfo != "Unavailable")
@@ -266,94 +255,94 @@ struct TrackView: View {
                                                     ProgressView()
                                                 }
                                             }
+                                            
+                                            
+                                            
+                                        }
                                         
-                                        
-                                    
+                                    }
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .padding(32)
                                 }
-                                
                             }
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .padding()
                         }
                     }
                 }
+                .background(.black)
+            }
+            .musicSubscriptionOffer(isPresented: $isPresented, options: options)
+            .toolbar(.hidden, for: .tabBar)
+            .opacity(0.9)
+            .onReceive(timer, perform: { input in
+                updateSlider()
+            })
+            .onAppear {
+                viewModel.fetchContent()
             }
         }
-        .background(.black)
-    }
-        .musicSubscriptionOffer(isPresented: $isPresented, options: options)
-        .toolbar(.hidden, for: .tabBar)
-        .opacity(0.9)
-        .onReceive(timer, perform: { input in
-            updateSlider()
-        })
-        .onAppear {
-            viewModel.fetchContent()
-        }
-}
-    .background {
-        if let _ = viewModel.song {
-            VStack(spacing: 0){
-                Rectangle()
-                    .fill(Color("purple"))
-                
-                Rectangle()
-                    .frame(maxWidth: .infinity, maxHeight: 180)
-                    .foregroundColor(Color(uiColor: .clear))
-                    .overlay {
-                        LinearGradient(
-                            colors: [Color("purple"), .black],
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-                        .ignoresSafeArea()
-                    }
-                
-                Rectangle()
-                    .fill(.black)
+        .background {
+            if let _ = viewModel.song {
+                VStack(spacing: 0){
+                    Rectangle()
+                        .fill(Color("purple"))
+                    
+                    Rectangle()
+                        .frame(maxWidth: .infinity, maxHeight: 180)
+                        .foregroundColor(Color(uiColor: .clear))
+                        .overlay {
+                            LinearGradient(
+                                colors: [Color("purple"), .black],
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                            .ignoresSafeArea()
+                        }
+                    
+                    Rectangle()
+                        .fill(.black)
+                }
+            } else {
+                Color(.white)
             }
-        } else {
-            Color(.white)
+        }
+        .ignoresSafeArea()
+        
+    }
+    
+    
+    func updateSlider () {
+        sliderValue = Float(player.getPlaybackTime())
+    }
+    
+    func offerMusic(){
+        Task{
+            let status = try await MusicSubscription.current
+            if status.canBecomeSubscriber{
+                isPresented.toggle()
+                play = false
+            }
         }
     }
-    .ignoresSafeArea()
-
-}
-
-
-func updateSlider () {
-    sliderValue = Float(player.getPlaybackTime())
-}
-
-func offerMusic(){
-    Task{
-        let status = try await MusicSubscription.current
-        if status.canBecomeSubscriber{
-            isPresented.toggle()
-            play = false
+    
+    
+    func populateString (song: AppleMusicSong) -> [String]{
+        var aux = [String]()
+        aux.append("Genre: " + song.genreNames.first!)
+        aux.append("Album: " + (song.albumTitle ?? "Unavailable"))
+        let data = DateFormatter()
+        data.dateFormat = "YYYY"
+        aux.append("Year: " + data.string(from: song.releaseDate!))
+        return aux
+    }
+    
+    func addsToPlaylist (musica: Song){
+        Task{
+            let library = MusicLibrary.shared
+            let playlist = try await library.createPlaylist(name: "Recommendations")
+            try await library.add(musica, to: playlist)
         }
     }
-}
-
-
-func populateString (song: AppleMusicSong) -> [String]{
-    var aux = [String]()
-    aux.append("Genre: " + song.genreNames.first!)
-    aux.append("Album: " + (song.albumTitle ?? "Unavailable"))
-    let data = DateFormatter()
-    data.dateFormat = "YYYY"
-    aux.append("Year: " + data.string(from: song.releaseDate!))
-    return aux
-}
-
-func addsToPlaylist (musica: Song){
-    Task{
-        let library = MusicLibrary.shared
-        let playlist = try await library.createPlaylist(name: "Recommendations")
-        try await library.add(musica, to: playlist)
-    }
-}
-
+    
 }
 
 struct TrackView_Previews: PreviewProvider {

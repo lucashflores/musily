@@ -9,27 +9,15 @@ struct SheetView: View {
     
     var body: some View {
         VStack (alignment: .leading){
-            HStack{
-                Text (cardInfo.title)
-                    .padding(.horizontal)
-                    .padding(.vertical, 4)
+            Text (cardInfo.title)
                     .font(.headline)
                     .bold()
-                    .foregroundColor(Color(color1))
-                    .background(.white)
-                    .cornerRadius(16)
-                Spacer()
-                Image(systemName: icon)
-                    .font(.title)
-                    .bold()
                     .foregroundColor(.white)
-            }
             .padding(.bottom)
             Text(cardInfo.content)
                 .foregroundColor(.white)
                 .multilineTextAlignment(.leading)
                 .font(.footnote)
-                .bold()
             Spacer()
             
         }
@@ -54,30 +42,19 @@ struct CardView: View {
             VStack (alignment: .leading){
                 Text(cardInfo.content)
                     .foregroundColor(.white)
-                    .bold()
                     .multilineTextAlignment(.leading)
                     .font(.footnote)
                 Spacer()
-                HStack{
                     Text (cardInfo.title)
-                        .padding(.horizontal)
-                        .padding(.vertical, 4)
                         .font(.headline)
-                        .bold()
-                        .foregroundColor(Color(color2))
-                        .background(.white)
-                        .cornerRadius(16)
-                    Spacer()
-                    Image(systemName: icon)
-                        .font(.title)
-                        .bold()
                         .foregroundColor(.white)
+                        .bold()
+
                 }
-                }
-                .padding()
+                .padding(24)
                 .frame(width: 240, height: 240, alignment: .leading)
                 .background(
-                    LinearGradient(gradient: Gradient(colors: [Color(color1), Color(color2)]), startPoint: .top, endPoint: .bottom))
+                    LinearGradient(gradient: Gradient(colors: [Color(color2).opacity(0.8), Color(color2).opacity(0.2)]), startPoint: .top, endPoint: .bottom))
                 .cornerRadius(16)
         }
         .sheet(isPresented: $showingSheet) {
@@ -86,7 +63,7 @@ struct CardView: View {
                 .padding(32)
                 .presentationCornerRadius(32)
                 .background(
-                    LinearGradient(gradient: Gradient(colors: [Color(color1), Color(color2)]), startPoint: .top, endPoint: .bottom))
+                    LinearGradient(gradient: Gradient(colors: [Color("purple").opacity(0.8), Color(.black)]), startPoint: .top, endPoint: .bottom))
         }
         
         
