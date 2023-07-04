@@ -16,7 +16,6 @@ public class TrackViewModel: ObservableObject {
     
     
     public init() {
-        fetchContent()
     }
     
     
@@ -26,7 +25,7 @@ public class TrackViewModel: ObservableObject {
         case .authorized:
             do {
                 
-                let request = MusicCatalogResourceRequest<Playlist>(matching: \.id, equalTo: MusicItemID(rawValue: "pl.ce25c7c7bd30485ea94e3bd5a91a1e94"))
+                let request = MusicCatalogResourceRequest<Playlist>(matching: \.id, equalTo: MusicItemID(rawValue: "pl.u-GgA5kl6coX9rGYW"))
                 let plResponse = try await request.response()
                 let playlist = plResponse.items.first
                 let plWithTracks = try await playlist?.with([.tracks])
@@ -39,9 +38,9 @@ public class TrackViewModel: ObservableObject {
                 let songResponse = try await songRequest.response()
                 let songWithArtists = try await songResponse.items.first?.with([.artists])
                 let fetchedSong = songWithArtists.map({ song in
-                    return AppleMusicSong(title: song.title, releaseDate: song.releaseDate, albumTitle: song.albumTitle , genreNames: song.genreNames.filter({ genre in
-                        return genre != "Music"
-                    }), artistName: song.artistName, composerName: song.composerName ?? "Unavailable", artistArtworkURL: (song.artwork?.url(width: 330, height: 330))!, albumArtworkURL: (song.artwork?.url(width: 300, height: 300))!, songURL: song.url!, musicKitSong: song)
+                    return AppleMusicSong(title: song.title, releaseDate: song.releaseDate, albumTitle: song.albumTitle , genreNames: song.genreNames.filter { $0 != "Music" }.flatMap {
+                        $0.components(separatedBy: "/")
+                    }, artistName: song.artistName, composerName: song.composerName ?? "Unavailable", artistArtworkURL: (song.artwork?.url(width: 330, height: 330))!, albumArtworkURL: (song.artwork?.url(width: 300, height: 300))!, songURL: song.url!, musicKitSong: song)
                 })
                 guard let fetchedSong else { return }
                 let data = try? Data(contentsOf: fetchedSong.albumArtworkURL)
@@ -131,10 +130,11 @@ public class TrackViewModel: ObservableObject {
                 }
             }
         }
-        
+        print(genreNames)
         for genreName in genreNames {
-            NetworkManager.shared.getGenreInfo(genre: genreName) {
+            NetworkManager.shared.getGenreInfo(genre: genreName.replacingOccurrences(of: "-", with: "")) {
                 result in
+                
                 switch result {
                 case (.success(let genreResponse)):
                     if (self.allGenreInformation == nil) {
