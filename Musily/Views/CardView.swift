@@ -29,6 +29,7 @@ struct SheetView: View {
                 .foregroundColor(.white)
                 .multilineTextAlignment(.leading)
                 .font(.footnote)
+                .bold()
             Spacer()
             
         }
@@ -56,6 +57,7 @@ struct CardView: View {
                     .bold()
                     .multilineTextAlignment(.leading)
                     .font(.footnote)
+                Spacer()
                 HStack{
                     Text (cardInfo.title)
                         .padding(.horizontal)

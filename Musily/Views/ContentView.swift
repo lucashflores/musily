@@ -27,8 +27,9 @@ struct ContentView: View {
             })
             .onAppear {
                 if !showOnboarding {
-                    authStatus = .authorized
+                    getAuth()
                 }
+                authNotification()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }

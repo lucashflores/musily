@@ -180,7 +180,7 @@ struct TrackView: View {
                                         /// Artista vem aqui
                                         VStack (alignment: .leading){
                                             HStack{
-                                                Text ("ABOUT the artist")
+                                                Text ("ABOUT The Artist")
                                                     .padding(.horizontal)
                                                     .padding(.vertical, 8)
                                                     .font(.headline)
@@ -233,18 +233,18 @@ struct TrackView: View {
                                                     
                                                     if (trackInfo != "Unavailable")
                                                     {
-                                                        CardView(cardInfo: MediaInformationCard(title: "The Track", content: trackInfo), color1: "green", color2: "purple", icon: "music.mic.fill")
+                                                        CardView(cardInfo: MediaInformationCard(title: "ABOUT The Track", content: trackInfo), color1: "green", color2: "purple", icon: "music.mic.circle.fill")
                                                     }
                                                     if (albumInfo != "Unavailable")
                                                     {
-                                                        CardView(cardInfo: MediaInformationCard(title: "The Album", content: albumInfo), color1: "green", color2: "purple", icon: "opticaldisc.fill")
+                                                        CardView(cardInfo: MediaInformationCard(title: "ABOUT The Album", content: albumInfo), color1: "green", color2: "purple", icon: "opticaldisc.fill")
                                                     }
                                                     
                                                     ForEach(allGenreInformation)
                                                     { genre in
-                                                        CardView(cardInfo: MediaInformationCard(title: "The Genre - \(genre.genreName)", content: genre.genreInfo ?? "loading"), color1: "green",
+                                                        CardView(cardInfo: MediaInformationCard(title: "ABOUT The Genre - \(genre.genreName)", content: genre.genreInfo ?? "loading"), color1: "green",
                                                                  color2: "purple", icon:
-                                                                    "opticaldisc.fill")
+                                                                    "music.note")
                                                         
                                                     }
                                                     
