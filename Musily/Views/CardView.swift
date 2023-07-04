@@ -1,19 +1,20 @@
 import SwiftUI
 
 struct SheetView: View {
-        @Environment(\.dismiss) var dismiss
-        var cardInfo: MediaInformationCard
-
+    @Environment(\.dismiss) var dismiss
+    var cardInfo: MediaInformationCard
+    
     var body: some View {
         VStack (alignment: .leading){
             Text (cardInfo.title)
-                .foregroundColor(.white)
-                .font(.title2)
-                .bold()
-                .padding(.bottom, 16)
+                    .font(.headline)
+                    .bold()
+                    .foregroundColor(.white)
+            .padding(.bottom)
             Text(cardInfo.content)
                 .foregroundColor(.white)
-                .font(.caption)
+                .multilineTextAlignment(.leading)
+                .font(.footnote)
             Spacer()
             
         }
@@ -35,27 +36,28 @@ struct CardView: View {
             VStack (alignment: .leading){
                 Text(cardInfo.content)
                     .foregroundColor(.white)
-                    .font(.caption)
+                    .multilineTextAlignment(.leading)
+                    .font(.footnote)
                 Spacer()
-                Text (cardInfo.title)
-                    .foregroundColor(.white)
-                    .font(.title2)
-                    .bold()
-                    
+                    Text (cardInfo.title)
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .bold()
+
                 }
-                .padding()
+                .padding(24)
                 .frame(width: 240, height: 240, alignment: .leading)
                 .background(
-                    LinearGradient(gradient: Gradient(colors: [.white.opacity(0.5), .white.opacity(0.2)]), startPoint: .top, endPoint: .bottom))
+                    Color("purple").opacity(0.5))
                 .cornerRadius(16)
         }
         .sheet(isPresented: $showingSheet) {
             SheetView(cardInfo: cardInfo)
                 .presentationDetents([.medium, .large])
                 .padding(32)
-                .cornerRadius(16)
+                .presentationCornerRadius(32)
                 .background(
-                    LinearGradient(gradient: Gradient(colors: [.black.opacity(0.7), .purple.opacity(0.2)]), startPoint: .top, endPoint: .bottom))
+                    LinearGradient(gradient: Gradient(colors: [Color("purple").opacity(0.5), Color(.black)]), startPoint: .top, endPoint: .bottom))
         }
         
         

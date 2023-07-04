@@ -29,6 +29,7 @@ struct ContentView: View {
                 if !showOnboarding {
                     getAuth()
                 }
+                authNotification()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }

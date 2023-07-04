@@ -7,7 +7,5 @@
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.widgetkit-extension</string>
 	</dict>
-	<key>NSAppleMusicUsageDescription</key>
-	<string>DISC helps you discover new songs</string>
 </dict>
 </plist>
