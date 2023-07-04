@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A9FBB192A54484700237292 /* UiColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9FBB182A54484700237292 /* UiColor+.swift */; };
 		5AEBF15C2A446AE4003D9252 /* TrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEBF15B2A446AE4003D9252 /* TrackView.swift */; };
 		C16C40422A50C3F60038D6AD /* AppleMusicGenre.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16C40412A50C3F60038D6AD /* AppleMusicGenre.swift */; };
 		C16C40442A50CB110038D6AD /* AppleMusicAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16C40432A50CB110038D6AD /* AppleMusicAlbum.swift */; };
@@ -51,7 +52,6 @@
 		FE0473A02A532E0300895B87 /* AppleMusicAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16C40432A50CB110038D6AD /* AppleMusicAlbum.swift */; };
 		FE0473A12A532E0900895B87 /* AppleMusicGenre.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16C40412A50C3F60038D6AD /* AppleMusicGenre.swift */; };
 		FE39C6CC2A4B0D51007B475E /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE39C6CB2A4B0D51007B475E /* InfoView.swift */; };
-		FE4E95AA2A4C66DB0009B304 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4E95A92A4C66DB0009B304 /* UIColor+.swift */; };
 		FE4E95AC2A4C76F80009B304 /* GenreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4E95AB2A4C76F80009B304 /* GenreView.swift */; };
 		FEC2D69D2A51E32700F03412 /* MusicSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC2D69C2A51E32700F03412 /* MusicSlider.swift */; };
 /* End PBXBuildFile section */
@@ -95,6 +95,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5A9FBB182A54484700237292 /* UiColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UiColor+.swift"; sourceTree = "<group>"; };
 		5AEBF15B2A446AE4003D9252 /* TrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackView.swift; sourceTree = "<group>"; };
 		C16C40412A50C3F60038D6AD /* AppleMusicGenre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicGenre.swift; sourceTree = "<group>"; };
 		C16C40432A50CB110038D6AD /* AppleMusicAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicAlbum.swift; sourceTree = "<group>"; };
@@ -141,7 +142,6 @@
 		FE04739A2A532CF900895B87 /* Musily */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Musily; sourceTree = "<group>"; };
 		FE04739D2A532DD600895B87 /* TrackViewModel2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackViewModel2.swift; sourceTree = "<group>"; };
 		FE39C6CB2A4B0D51007B475E /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
-		FE4E95A92A4C66DB0009B304 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		FE4E95AB2A4C76F80009B304 /* GenreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreView.swift; sourceTree = "<group>"; };
 		FEC2D69C2A51E32700F03412 /* MusicSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSlider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -184,7 +184,6 @@
 			isa = PBXGroup;
 			children = (
 				C1C86DA02A49B68C00BD6E81 /* AppleMusicSong.swift */,
-				FE4E95A92A4C66DB0009B304 /* UIColor+.swift */,
 				C1C86DB32A4DC29800BD6E81 /* NetworkError.swift */,
 				C1C86DBA2A4EF83A00BD6E81 /* MediaInformationCard.swift */,
 				C16C40412A50C3F60038D6AD /* AppleMusicGenre.swift */,
@@ -195,6 +194,7 @@
 				C16C40532A52144D0038D6AD /* LastFMAlbum.swift */,
 				C16C40552A5217600038D6AD /* LastFMWiki.swift */,
 				C16C40572A521B3A0038D6AD /* LastFMTrack.swift */,
+				5A9FBB182A54484700237292 /* UiColor+.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -502,6 +502,7 @@
 				C1C86DB42A4DC29800BD6E81 /* NetworkError.swift in Sources */,
 				C1ADF4642A4F650A000138B5 /* CardView.swift in Sources */,
 				C1C86DA12A49B68C00BD6E81 /* AppleMusicSong.swift in Sources */,
+				5A9FBB192A54484700237292 /* UiColor+.swift in Sources */,
 				C1ADF4662A4F6590000138B5 /* IntroView.swift in Sources */,
 				C1C86DA62A4A9A0D00BD6E81 /* SubscribeToAppleMusicView.swift in Sources */,
 				FEC2D69D2A51E32700F03412 /* MusicSlider.swift in Sources */,
@@ -509,7 +510,6 @@
 				C1ADF4682A4F65B1000138B5 /* OnboardingTabView.swift in Sources */,
 				C16C404A2A5202E00038D6AD /* LastFMArtist.swift in Sources */,
 				C1C86DBB2A4EF83A00BD6E81 /* MediaInformationCard.swift in Sources */,
-				FE4E95AA2A4C66DB0009B304 /* UIColor+.swift in Sources */,
 				C16C40502A520DEA0038D6AD /* LastFMGenre.swift in Sources */,
 				C16C40462A50CC960038D6AD /* AlbumCardView.swift in Sources */,
 				C16C40542A52144D0038D6AD /* LastFMAlbum.swift in Sources */,

@@ -15,7 +15,6 @@ public class TrackViewModel2 {
     public var song: AppleMusicSong?
     public var albums: [AppleMusicAlbum]?
     public var image : UIImage?
-//    public var bgColor = Color(.white)
     
     public init() {
     }
@@ -42,7 +41,7 @@ public class TrackViewModel2 {
                     let fetchedSong = songWithArtists.map({ song in
                         return AppleMusicSong(title: song.title, releaseDate: song.releaseDate, albumTitle: song.albumTitle , genreNames: song.genreNames.filter({ genre in
                             return genre != "Music"
-                        }), artistName: song.artistName, composerName: song.composerName!, artistArtworkURL: (song.artwork?.url(width: 330, height: 330))!, albumArtworkURL: (song.artwork?.url(width: 169, height: 169))!, songURL: song.url!, musicKitSong: song)
+                        }), artistName: song.artistName, composerName: song.composerName!, artistArtworkURL: (song.artwork?.url(width: 346, height: 346))!, albumArtworkURL: (song.artwork?.url(width: 169, height: 169))!, songURL: song.url!, musicKitSong: song)
                     })
                     guard let fetchedSong else { return }
                     self.song = fetchedSong
