@@ -42,7 +42,7 @@ struct Onboarding2View: View {
                 
                 VStack(spacing: 32) {
                     Text("""
-    Once per day DISC will recommend a song from an amazing artist, giving to you a chance to known more talents, songs and genres for you to broaden your horizons about music.
+    Once per day, DISC will recommend a song from an amazing artist, giving you a chance to know more talents, songs and genres for you to broaden your horizons about music.
     """)
                     .foregroundColor(.white)
                     .font(.body)
