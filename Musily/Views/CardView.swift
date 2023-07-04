@@ -54,7 +54,7 @@ struct CardView: View {
                 .padding(24)
                 .frame(width: 240, height: 240, alignment: .leading)
                 .background(
-                    LinearGradient(gradient: Gradient(colors: [Color(color2).opacity(0.8), Color(color2).opacity(0.2)]), startPoint: .top, endPoint: .bottom))
+                    Color("purple").opacity(0.5))
                 .cornerRadius(16)
         }
         .sheet(isPresented: $showingSheet) {
@@ -63,7 +63,7 @@ struct CardView: View {
                 .padding(32)
                 .presentationCornerRadius(32)
                 .background(
-                    LinearGradient(gradient: Gradient(colors: [Color("purple").opacity(0.8), Color(.black)]), startPoint: .top, endPoint: .bottom))
+                    LinearGradient(gradient: Gradient(colors: [Color("purple").opacity(0.5), Color(.black)]), startPoint: .top, endPoint: .bottom))
         }
         
         

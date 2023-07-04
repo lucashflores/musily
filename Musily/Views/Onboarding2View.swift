@@ -14,6 +14,13 @@ struct Onboarding2View: View {
                 .onAppear {
                     self.zoomPhoto.toggle()
                 }
+            Rectangle()
+                .ignoresSafeArea()
+                .foregroundColor(Color(uiColor: .clear))
+                .overlay {
+                    LinearGradient(
+                        colors: [.black, .black .opacity(0.5), Color(uiColor: .clear), Color(uiColor: .clear)], startPoint: .bottom, endPoint: .top) .ignoresSafeArea()
+                }
             
             VStack {
                 HStack {
@@ -47,17 +54,20 @@ struct Onboarding2View: View {
                         HStack (spacing: 10) {
                             
                             //TEXTO DO BOTAO
-                            Text("Let's start")
+                            Text("Start discovering")
                                 .font(Font.system(size: 18, weight: .bold))
                                 .multilineTextAlignment(.center)
+                                .foregroundColor(.white)
+                            
+                            Image(systemName: "arrow.right.circle")
                                 .foregroundColor(.white)
                         }
                         .padding(.vertical, 12)
                         .padding(.horizontal, 32)
                         .background(Color("purple").opacity(0.7))
                         .cornerRadius(32)
-                }
-                      
+                    }
+                    
                     
                 }
                 

@@ -19,19 +19,12 @@ struct TrackView: View {
     var body: some View {
         
         VStack {
-            ScrollView {
-                ZStack {
-                    if (viewModel.song == nil) {
-                        ZStack {
-                            Spacer()
-                            
-                            ProgressView()
-                                .progressViewStyle(.circular)
-                            
-                            Spacer()
-                        }
-                    }
-                    else {
+            if (viewModel.song == nil){
+                SplashScreen()
+            }
+            else{
+                ScrollView {
+                    ZStack {
                         if let music = viewModel.song {
                             ZStack {
                                 VStack(spacing: 0) {
@@ -222,16 +215,16 @@ struct TrackView: View {
                                                     
                                                     if (trackInfo != "Unavailable")
                                                     {
-                                                        CardView(cardInfo: MediaInformationCard(title: "ABOUT The Track", content: trackInfo), color1: "green", color2: "purple", icon: "music.mic.circle.fill")
+                                                        CardView(cardInfo: MediaInformationCard(title: "The Track", content: trackInfo), color1: "green", color2: "purple", icon: "music.mic.circle.fill")
                                                     }
                                                     if (albumInfo != "Unavailable")
                                                     {
-                                                        CardView(cardInfo: MediaInformationCard(title: "ABOUT The Album", content: albumInfo), color1: "green", color2: "purple", icon: "opticaldisc.fill")
+                                                        CardView(cardInfo: MediaInformationCard(title: "The Album", content: albumInfo), color1: "green", color2: "purple", icon: "opticaldisc.fill")
                                                     }
                                                     
                                                     ForEach(allGenreInformation)
                                                     { genre in
-                                                        CardView(cardInfo: MediaInformationCard(title: "ABOUT The Genre - \(genre.genreName)", content: genre.genreInfo ?? "loading"), color1: "green",
+                                                        CardView(cardInfo: MediaInformationCard(title: "The Genre - \(genre.genreName)", content: genre.genreInfo ?? "loading"), color1: "green",
                                                                  color2: "purple", icon:
                                                                     "music.note")
                                                         
@@ -267,18 +260,18 @@ struct TrackView: View {
                             }
                         }
                     }
+                    .background(.black)
                 }
-                .background(.black)
             }
-            .musicSubscriptionOffer(isPresented: $isPresented, options: options)
-            .toolbar(.hidden, for: .tabBar)
-            .opacity(0.9)
-            .onReceive(timer, perform: { input in
-                updateSlider()
-            })
-            .onAppear {
-                viewModel.fetchContent()
-            }
+        }
+        .musicSubscriptionOffer(isPresented: $isPresented, options: options)
+        .toolbar(.hidden, for: .tabBar)
+        .opacity(0.9)
+        .onReceive(timer, perform: { input in
+            updateSlider()
+        })
+        .onAppear {
+            viewModel.fetchContent()
         }
         .background {
             if let _ = viewModel.song {
