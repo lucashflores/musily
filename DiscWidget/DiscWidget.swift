@@ -7,6 +7,7 @@
 
 import WidgetKit
 import SwiftUI
+import MusicKit
 //import Musily
 
 //struct AppleMusicSong {
@@ -36,19 +37,30 @@ struct Provider: TimelineProvider {
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         
-        
         Task {
             var entries: [SimpleEntry] = []
-            await viewModel.fetchMusic()
             let currentDate = Date()
             let midnight = Calendar.current.startOfDay(for: currentDate)
-            let entry = SimpleEntry(date: currentDate, title: viewModel.song!.title!, artist: viewModel.song!.artistName!, image: viewModel.image!)
-            print (String(describing: viewModel.image!))
-            entries.append(entry)
-            let updateDate = Calendar.current.date(byAdding: .day, value: 1, to: midnight)!
+            let status = await MusicAuthorization.request()
+            switch status{
+            case .authorized:
+                await viewModel.fetchMusic()
+                let entry = SimpleEntry(date: currentDate, title: viewModel.song!.title!, artist: viewModel.song!.artistName!, image: viewModel.image!)
+                print (String(describing: viewModel.image!))
+                entries.append(entry)
+                let updateDate = Calendar.current.date(byAdding: .day, value: 1, to: midnight)!
 
-            let timeline = Timeline(entries: entries, policy: .after(updateDate))
-            completion(timeline)
+                let timeline = Timeline(entries: entries, policy: .after(updateDate))
+                completion(timeline)
+            default:
+                let entry = SimpleEntry(date: currentDate, title: "", artist: "You need to enable this app's access to your Music Library", image: UIImage(systemName: "photo.fill"))
+                entries.append(entry)
+                let updateDate = Calendar.current.date(byAdding: .day, value: 1, to: midnight)!
+
+                let timeline = Timeline(entries: entries, policy: .after(updateDate))
+                completion(timeline)
+            }
+        
         }
        
     }
@@ -93,6 +105,7 @@ struct DiscWidget: Widget {
         }
         .configurationDisplayName("My Widget")
         .description("This is an example widget.")
+        .supportedFamilies([.systemSmall])
     }
 }
 

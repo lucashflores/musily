@@ -3,7 +3,7 @@ import SwiftUI
 struct InstructionsView: View {
     var body: some View {
         VStack{
-            Text("You need to enable this app's access to Apple Music.")
+            Text("You need to enable this app's access to your Music Library")
         }
         .onAppear(perform: openURl) 
     }
