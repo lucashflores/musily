@@ -5,7 +5,7 @@ import MediaPlayer
 struct ContentView: View {
     @State var authStatus: AuthStatus = .fetchingAuth
     @State var offer : Bool = false
-    @State var showOnboarding: Bool = true
+    @AppStorage("showOnboarding") private var showOnboarding = true
     var body: some View {
         NavigationView {
             TabView{
@@ -25,7 +25,11 @@ struct ContentView: View {
             .onChange(of: showOnboarding, perform: { newValue in
                 getAuth()
             })
-            .onAppear(perform: authNotification)
+            .onAppear {
+                if !showOnboarding {
+                    authStatus = .authorized
+                }
+            }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .fullScreenCover(isPresented: $showOnboarding) {
