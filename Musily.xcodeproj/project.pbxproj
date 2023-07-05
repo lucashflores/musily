@@ -52,6 +52,8 @@
 		FE0473A02A532E0300895B87 /* AppleMusicAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16C40432A50CB110038D6AD /* AppleMusicAlbum.swift */; };
 		FE0473A12A532E0900895B87 /* AppleMusicGenre.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16C40412A50C3F60038D6AD /* AppleMusicGenre.swift */; };
 		FE152AE02A54AB0F00D34F7A /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE152ADF2A54AB0F00D34F7A /* SplashScreen.swift */; };
+		FE21D2942A558F230074FA9B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = FE21D2932A558F230074FA9B /* Lottie */; };
+		FE21D2972A558FE30074FA9B /* Animacao_Transicao.json in Resources */ = {isa = PBXBuildFile; fileRef = FE21D2962A558FE30074FA9B /* Animacao_Transicao.json */; };
 		FE39C6CC2A4B0D51007B475E /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE39C6CB2A4B0D51007B475E /* InfoView.swift */; };
 		FE4E95AC2A4C76F80009B304 /* GenreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4E95AB2A4C76F80009B304 /* GenreView.swift */; };
 		FEC2D69D2A51E32700F03412 /* MusicSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC2D69C2A51E32700F03412 /* MusicSlider.swift */; };
@@ -143,6 +145,7 @@
 		FE04739A2A532CF900895B87 /* Musily */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Musily; sourceTree = "<group>"; };
 		FE04739D2A532DD600895B87 /* TrackViewModel2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackViewModel2.swift; sourceTree = "<group>"; };
 		FE152ADF2A54AB0F00D34F7A /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		FE21D2962A558FE30074FA9B /* Animacao_Transicao.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Animacao_Transicao.json; path = ../../../../Downloads/Animacao_Transicao.json; sourceTree = "<group>"; };
 		FE39C6CB2A4B0D51007B475E /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		FE4E95AB2A4C76F80009B304 /* GenreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreView.swift; sourceTree = "<group>"; };
 		FEC2D69C2A51E32700F03412 /* MusicSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSlider.swift; sourceTree = "<group>"; };
@@ -153,6 +156,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE21D2942A558F230074FA9B /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,6 +231,7 @@
 		C17B20AE2A43195B006EDAF7 /* Musily */ = {
 			isa = PBXGroup;
 			children = (
+				FE21D2952A558F870074FA9B /* LottieAnimation */,
 				C1C86DB92A4EF7EB00BD6E81 /* Views */,
 				C1C86DAE2A4DAF6C00BD6E81 /* Utilities */,
 				5AEBF15A2A446A8D003D9252 /* Model */,
@@ -327,6 +332,14 @@
 			path = DiscWidget;
 			sourceTree = "<group>";
 		};
+		FE21D2952A558F870074FA9B /* LottieAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				FE21D2962A558FE30074FA9B /* Animacao_Transicao.json */,
+			);
+			path = LottieAnimation;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -345,6 +358,9 @@
 				FE0473942A53100900895B87 /* PBXTargetDependency */,
 			);
 			name = Musily;
+			packageProductDependencies = (
+				FE21D2932A558F230074FA9B /* Lottie */,
+			);
 			productName = Musily;
 			productReference = C17B20AC2A43195B006EDAF7 /* Musily.app */;
 			productType = "com.apple.product-type.application";
@@ -437,6 +453,9 @@
 				Base,
 			);
 			mainGroup = C17B20A32A43195B006EDAF7;
+			packageReferences = (
+				FE21D2922A558F230074FA9B /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			productRefGroup = C17B20AD2A43195B006EDAF7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -455,6 +474,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C17B20B72A43195C006EDAF7 /* Preview Assets.xcassets in Resources */,
+				FE21D2972A558FE30074FA9B /* Animacao_Transicao.json in Resources */,
 				C17B20B42A43195C006EDAF7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -941,6 +961,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FE21D2922A558F230074FA9B /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FE21D2932A558F230074FA9B /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE21D2922A558F230074FA9B /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C17B20A42A43195B006EDAF7 /* Project object */;
 }

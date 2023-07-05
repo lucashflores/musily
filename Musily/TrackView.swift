@@ -5,6 +5,7 @@ struct TrackView: View {
     var cards: [MediaInformationCard]?
     var player = AppleMusicPlayer()
     var deepLinker = DeepLink()
+    var deepLinker2 = DeepLink()
     @State var options = MusicSubscriptionOffer.Options(
         messageIdentifier: .playMusic
     )
@@ -20,7 +21,7 @@ struct TrackView: View {
         
         VStack {
             if (viewModel.song == nil){
-                SplashScreen()
+                SplashScreen(name: "Animacao_Transicao", loopMode: .loop)
             }
             else{
                 ScrollView {
@@ -215,18 +216,18 @@ struct TrackView: View {
                                                     
                                                     if (trackInfo != "Unavailable")
                                                     {
-                                                        CardView(cardInfo: MediaInformationCard(title: "The Track", content: trackInfo))
+                                                        CardView(cardInfo: MediaInformationCard(title: "The Track", subtitle: music.title!, content: trackInfo))
                                                     }
                                                     if (albumInfo != "Unavailable")
                                                     {
-                                                        CardView(cardInfo: MediaInformationCard(title: "The Album", content: albumInfo))
+                                                        CardView(cardInfo: MediaInformationCard(title: "The Album", subtitle: music.albumTitle!, content: albumInfo))
                                                     }
                                                     
                                                     ForEach(allGenreInformation)
                                                     { genre in
                                                         if (genre.genreInfo != "Unavailable")
                                                         {
-                                                            CardView(cardInfo: MediaInformationCard(title: "The Genre - \(genre.genreName)", content: genre.genreInfo ?? "loading"))
+                                                            CardView(cardInfo: MediaInformationCard(title: "The Genre", subtitle: genre.genreName, content: genre.genreInfo ?? "loading"))
                                                         }
                                                         
                                                     }
