@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class DeepLink {
+class DeepLinker {
     func redirect(url: URL) {
         Task {
             await UIApplication.shared.open(url)

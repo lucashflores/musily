@@ -4,8 +4,7 @@ import MusicKit
 struct TrackView: View {
     var cards: [MediaInformationCard]?
     var player = AppleMusicPlayer()
-    var deepLinker = DeepLink()
-    var deepLinker2 = DeepLink()
+    var deepLinker = DeepLinker()
     @State var options = MusicSubscriptionOffer.Options(
         messageIdentifier: .playMusic
     )
