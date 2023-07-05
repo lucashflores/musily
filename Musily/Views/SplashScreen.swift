@@ -1,26 +1,28 @@
+//
+//  File.swift
+//  Musily
+//
+//  Created by Gabriela Nunes on 02/07/23.
+//
+
 import SwiftUI
+import Lottie
 
-struct SplashScreen: View {
-    var body: some View {
-        ZStack {
-            Image("loading")
-                .resizable()
-                .scaledToFill()
-                .ignoresSafeArea()
+struct SplashScreen: UIViewRepresentable {
+    
+        let name: String
+        let loopMode: LottieLoopMode
+        
+        func makeUIView(context: Context) -> Lottie.LottieAnimationView {
+            let animationView = LottieAnimationView (name: name)
+            animationView.loopMode = loopMode
+            animationView.play ()
             
-            Rectangle()
-                .ignoresSafeArea()
-                .opacity(0.35)
-            
-            Text("We are arranging the Disc for you.")
-                .font(.system(size: 20))
-                .foregroundColor(.white)
+            return animationView
         }
+    
+    func updateUIView(_ uiView: Lottie.LottieAnimationView, context: Context) {
+    
     }
-}
-
-struct SplashScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        SplashScreen()
-    }
+    
 }
