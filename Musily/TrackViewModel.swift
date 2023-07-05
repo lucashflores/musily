@@ -88,7 +88,7 @@ public class TrackViewModel: ObservableObject {
             result in
             switch result {
             case (.success(let artistResponse)):
-                let artistInfoResponse = artistResponse.artist.bio.summary
+                let artistInfoResponse = artistResponse.artist.bio.content
         
                 DispatchQueue.main.async {
                     if (artistInfoResponse.replacingOccurrences(of: " ", with: " ").count == 0)
@@ -112,7 +112,7 @@ public class TrackViewModel: ObservableObject {
             switch result {
             case (.success(let trackResponse)):
                 DispatchQueue.main.async {
-                    let trackInfoResponse = trackResponse.track.wiki.summary
+                    let trackInfoResponse = trackResponse.track.wiki.content
                     if (trackInfoResponse.replacingOccurrences(of: " ", with: " ").count == 0)
                     {
                         self.trackInfo = "Unavailable"
@@ -136,7 +136,8 @@ public class TrackViewModel: ObservableObject {
             switch result {
             case (.success(let albumResponse)):
                 DispatchQueue.main.async {
-                    let albumInfoResponse = albumResponse.album.wiki.summary
+                    let albumInfoResponse = albumResponse.album.wiki.content
+                    print(albumInfoResponse)
                     if (albumInfoResponse.replacingOccurrences(of: " ", with: " ").count == 0)
                     {
                         self.albumInfo = "Unavailable"
@@ -166,8 +167,9 @@ public class TrackViewModel: ObservableObject {
                         }
                     }
                     DispatchQueue.main.async {
-                        let genreInfoResponse = genreResponse.tag.wiki.summary
+                        let genreInfoResponse = genreResponse.tag.wiki.content
                         if (genreInfoResponse.replacingOccurrences(of: " ", with: " ").count > 0) {
+                            print(genreInfoResponse)
                             self.allGenreInformation?.append(GenreInfo(genreName: genreName, genreInfo: addDotAtTheEnd(info: genreInfoResponse.replacingOccurrences(of: " <a(.*)", with: "", options: .regularExpression))))
                         }
                         else {
