@@ -9,6 +9,7 @@ import Foundation
 
 struct LastFMBio: Codable {
     var summary: String
+    var content: String
 }
 
 struct LastFMArtist: Codable {
